@@ -98,7 +98,7 @@ public class Test {
         saab95.setCurrentSpeed(2);
         double yPosistion = saab95.getY();
         saab95.setDirection(Car.Direction.UP);
-        saab95.Move();
+        saab95.move();
         assertTrue(yPosistion < saab95.getY());
     }
 
@@ -106,8 +106,8 @@ public class Test {
     public void testCarMoveRight() {
         saab95.setCurrentSpeed(2);
         double xPosistion = saab95.getX();
-        saab95.setDirection(Car.Direction.Right);
-        saab95.Move();
+        saab95.setDirection(Car.Direction.RIGHT);
+        saab95.move();
         assertTrue(xPosistion < saab95.getX());
     }
 
@@ -116,7 +116,7 @@ public class Test {
         saab95.setCurrentSpeed(2);
         double yPosistion = saab95.getY();
         saab95.setDirection(Car.Direction.DOWN);
-        saab95.Move();
+        saab95.move();
         assertTrue(yPosistion > saab95.getY());
     }
 
@@ -125,7 +125,7 @@ public class Test {
         saab95.setCurrentSpeed(2);
         double xPosistion = saab95.getX();
         saab95.setDirection(Car.Direction.LEFT);
-        saab95.Move();
+        saab95.move();
         assertTrue(xPosistion > saab95.getX());
     }
 
@@ -133,12 +133,12 @@ public class Test {
     public void testCarUpTurnRight() {
         volvo240.setDirection(Car.Direction.UP);
         volvo240.turnRight();
-        assertSame(volvo240.getDirection(), Car.Direction.Right);
+        assertSame(volvo240.getDirection(), Car.Direction.RIGHT);
     }
 
     @org.junit.Test
     public void testCarRightTurnRight() {
-        volvo240.setDirection(Car.Direction.Right);
+        volvo240.setDirection(Car.Direction.RIGHT);
         volvo240.turnRight();
         assertSame(volvo240.getDirection(), Car.Direction.DOWN);
     }
@@ -154,7 +154,7 @@ public class Test {
     public void testCarDownTurnLeft() {
         volvo240.setDirection(Car.Direction.DOWN);
         volvo240.turnLeft();
-        assertSame(volvo240.getDirection(),Car.Direction.Right);
+        assertSame(volvo240.getDirection(),Car.Direction.RIGHT);
     }
 
     @org.junit.Test
