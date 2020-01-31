@@ -269,6 +269,12 @@ public class Car implements Movable {
      * @param currentSpeed holds the new currentSpeed as a double
      */
     protected void setCurrentSpeed(double currentSpeed) {
-        this.currentSpeed = currentSpeed;
+        if (currentSpeed > this.getEnginePower()) {
+            this.currentSpeed = this.getEnginePower();
+        } else if (currentSpeed < 0) {
+            this.currentSpeed = 0;
+        } else {
+            this.currentSpeed = currentSpeed;
+        }
     }
 }
