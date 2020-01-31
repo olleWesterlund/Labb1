@@ -7,7 +7,7 @@ import java.awt.*;
  * @Author Olle Westerlund
  */
 
-public class Car implements Movable {
+public abstract class Car implements Movable {
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The  current speed of the car
@@ -30,23 +30,16 @@ public class Car implements Movable {
      */
 
     public Car(int nrDoors, double enginePower, double currentSpeed, Color color,
-               String modelName, double xPosition, double yPosition) {
+               String modelName, double xPosition, double yPosition, Direction direction) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
-        this.direction = Direction.UP;
+        this.direction = direction;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         stopEngine();
-    }
-
-    /**
-     * enum used to decide what direction the car is driving
-     */
-    public enum Direction {
-        LEFT, RIGHT, UP, DOWN
     }
 
     /**
@@ -63,7 +56,7 @@ public class Car implements Movable {
         } else if (dir == Direction.DOWN) {
             setY(getY() - currentSpeed);
         } else if (dir == Direction.LEFT) {
-            setY(getY() - currentSpeed);
+            setX(getX() - currentSpeed);
         }
     }
 
@@ -163,7 +156,7 @@ public class Car implements Movable {
      * @return the speedFactor for a car
      */
     protected double speedFactor() {
-        return this.speedFactor();
+        return getEnginePower() * 0.01;
     }
 
     /**
