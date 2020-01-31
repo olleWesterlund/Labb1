@@ -1,16 +1,16 @@
 interface Movable {
     /**
-     * Method move moves an Object
+     * Method move used to move an object
      */
     void move();
 
     /**
-     * method turnLeft turns an Object left
+     * Method turnLeft used to turn an object left
      */
     void turnLeft();
 
     /**
-     * method turnRight turns an Object right
+     * Method turnRight used to turn an object Right
      */
     void turnRight();
 }

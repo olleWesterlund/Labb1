@@ -7,10 +7,10 @@ import java.awt.*;
  * @Author Olle Westerlund
  */
 
-public class Car implements Movable {
+public abstract class Car implements Movable {
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
-    private double currentSpeed; // The  current speed of the var
+    private double currentSpeed; // The  current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
     private Direction direction; // Direction of the car
@@ -25,33 +25,26 @@ public class Car implements Movable {
      * @param currentSpeed The current speed of the var as a Double
      * @param color        Color of the car
      * @param modelName    Model name of the car as a String
-     * @param xPosition    Position on X-Axis as a Double
-     * @param yPosition    Position on Y-Axis as a Double
+     * @param xPosition    The cars position on X-Axis as a Double
+     * @param yPosition    The cars position on Y-Axis as a Double
      */
 
     public Car(int nrDoors, double enginePower, double currentSpeed, Color color,
-               String modelName, double xPosition, double yPosition) {
+               String modelName, double xPosition, double yPosition, Direction direction) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
-        this.direction = Direction.UP;
+        this.direction = direction;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         stopEngine();
     }
 
     /**
-     * enum used to decide what direction car is driving
-     */
-    public enum Direction {
-        LEFT, RIGHT, UP, DOWN
-    }
-
-    /**
-     * moves the car with currentspeed, if the direction of the car is UP or RIGHT
-     * then plus the currentspeed, for LEFT and DOWN, currentspeed is subtracted
+     * Moves the car with currentSpeed, if the direction of the car is UP or RIGHT
+     * then plus the currentSpeed, for LEFT and DOWN, currentSpeed is subtracted
      */
     @Override
     public void move() {
@@ -68,7 +61,7 @@ public class Car implements Movable {
     }
 
     /**
-     * Handles what directions to turn the car of turnRight is applied to a car.
+     * Handles what directions to turn the car when turnRight is applied to a car.
      * ex. if Car direction is LEFT and turnRight is applied, the car will have
      * a new direction UP.
      */
@@ -89,7 +82,7 @@ public class Car implements Movable {
     /**
      * Handles what directions to turn the car of turnLeft is applied to a car.
      * ex. if Car direction is RIGHT and turnLeft is applied, the car will have
-     * a new direction DOWN.
+     * a new direction UP.
      */
     @Override
     public void turnLeft() {
@@ -106,8 +99,8 @@ public class Car implements Movable {
     }
 
     /**
-     * Speeds up the car with some value by calling incrementSpeed
-     * amount must be bigger or equal to 0, and less or equal to one
+     * Speeds up the car with some value by calling incrementSpeed,
+     * amount must be bigger or equal to 0 and less or equal to one
      *
      * @param amount holds how much to increase the speed by a double
      */
@@ -120,8 +113,8 @@ public class Car implements Movable {
     }
 
     /**
-     * Slows the car with some value, by calling decrementSpeed
-     * amount must be bigger or equal to 0, and less or equal to 1
+     * Slows the car with some value, by calling decrementSpeed,
+     * amount must be bigger or equal to 0 and less or equal to 1
      *
      * @param amount holds how much to decrease the speed of the car by a double
      */
@@ -136,31 +129,34 @@ public class Car implements Movable {
     /**
      * Increases the speed of the car by some amount
      *
-     * @param amount holds how much to increase it in double
+     * @param amount holds how much to increase the speed in double
      */
     protected void incrementSpeed(double amount) {
         double speed = getCurrentSpeed();
         setCurrentSpeed(Math.max(getCurrentSpeed() + speedFactor() * amount, 0));
         if (speed > getCurrentSpeed()) {
-            throw new IllegalArgumentException("Speed did not increse");
+            throw new IllegalArgumentException("Speed did not increase");
         }
     }
 
     /**
      * Decreases the speed of a car by amount
      *
-     * @param amount holds how much to decrease it in double
+     * @param amount holds how much to decrease the speed in double
      */
     protected void decrementSpeed(double amount) {
         double speed = getCurrentSpeed();
         setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount, 0));
+        if (speed < getCurrentSpeed()) {
+            throw new IllegalArgumentException("Speed did not decrease");
+        }
     }
 
     /**
      * @return the speedFactor for a car
      */
     protected double speedFactor() {
-        return this.speedFactor();
+        return getEnginePower() * 0.01;
     }
 
     /**
@@ -180,67 +176,67 @@ public class Car implements Movable {
     }
 
     /**
-     * @return x for car movement on X-axis
+     * @return x for the cars position on the X-axis
      */
     public double getX() {
         return xPosition;
     }
 
     /**
-     * @return y for car movement on Y-axis
+     * @return y for the cars position on the Y-axis
      */
     public double getY() {
         return yPosition;
     }
 
     /**
-     * chanages X-Coordinate
+     * Set a new value for xPosition
      *
-     * @param x double holds the position of a car X-axis
+     * @param x double holds the new xPosition of a car on the X-axis
      */
     protected void setX(double x) {
         this.xPosition = x;
     }
 
     /**
-     * changes Y-Coordinate
+     * Changes Y-Coordinate
      *
-     * @param y double holds the position of a car Y-Axis
+     * @param y double holds the new yPosition of a car on the Y-Axis
      */
     protected void setY(double y) {
         this.yPosition = y;
     }
 
     /**
-     * starts the engine by setting the speed to 0.1
+     * Starts the engine and sets the speed to 0.1
      */
     protected void startEngine() {
         currentSpeed = 0.1;
     }
 
     /**
-     * stops the engine by setting currentSpeed to 0
+     * Stops the engine and sets the currentSpeed to 0
      */
     protected void stopEngine() {
         currentSpeed = 0;
     }
 
     /**
-     * @return returns the number of doors as an Integer
+     * @return returns the number of doors as an int
      */
     public int getNrDoors() {
         return nrDoors;
     }
 
     /**
-     * @return returns the power of the engine as a Double
+     * @return returns the power of the engine as a double
      */
     double getEnginePower() {
         return enginePower;
     }
 
     /**
-     * @return returns current speed of the car as a Double
+     * @return returns current speed of the car as a double
      */
     double getCurrentSpeed() {
         return currentSpeed;
@@ -263,7 +259,7 @@ public class Car implements Movable {
     /**
      * changes the current speed of the car
      *
-     * @param currentSpeed holds the currentSpeed as a double
+     * @param currentSpeed holds the new currentSpeed as a double
      */
     protected void setCurrentSpeed(double currentSpeed) {
         this.currentSpeed = currentSpeed;

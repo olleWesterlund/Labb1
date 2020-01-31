@@ -8,10 +8,9 @@ public class Saab95 extends Car {
      */
     public Saab95() {
         super(2,125, 0,Color.red,
-                "Saab95", 1,1);
+                "Saab95", 1,1, Direction.UP);
         turboOn = false;
     }
-
     /**
      * sets the turbo for a Saab95 object on
      */
@@ -27,7 +26,7 @@ public class Saab95 extends Car {
     }
 
     /**
-     * Checks if turbo is on, returns true if turbo is on
+     * Checks if turbo is on for Saab95, returns true if turbo is on
      * @return true if the turbo is on, false if turbo is off
      */
     public boolean isTurboOn() {
@@ -42,6 +41,6 @@ public class Saab95 extends Car {
     public double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
-        return getEnginePower() * 0.01 * turbo;
+        return super.speedFactor() * turbo;
     }
 }
