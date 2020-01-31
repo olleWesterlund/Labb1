@@ -1,16 +1,16 @@
 public interface Movable {
     /**
-     * Method move moves a car
+     * Method move used to move a car
      */
     void move();
 
     /**
-     * method turnLeft turns a car left
+     * Method turnLeft used to turn a car left
      */
     void turnLeft();
 
     /**
-     * method turnRight turns a car right
+     * Method turnRight used to turn a car Right
      */
     void turnRight();
 }
