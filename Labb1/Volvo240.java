@@ -13,7 +13,8 @@ public class Volvo240 extends Car {
     }
 
     /**
-     * @return the enginepower multiplied with 0.01 and trimFactor(1.25)
+     * SpeedFactor increses the speed of the car by the trimFactor
+     * @return the enginePower multiplied with 0.01 and trimFactor(1.25)
      */
     @Override
     protected double speedFactor() {

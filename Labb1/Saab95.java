@@ -13,30 +13,30 @@ public class Saab95 extends Car {
     }
 
     /**
-     * sets the turbo on
+     * sets the turbo for a Saab95 object on
      */
     protected void setTurboOn() {
         turboOn = true;
     }
 
     /**
-     * sets the turbo off
+     * sets the turbo for a Saab95 object off
      */
     protected void setTurboOff() {
         turboOn = false;
     }
 
     /**
-     * Boolean to see if turbo is on
-     * @return
+     * Checks if turbo is on, returns true if turbo is on
+     * @return true if the turbo is on, false if turbo is off
      */
     public boolean isTurboOn() {
         return turboOn;
     }
 
     /**
-     * @return returns the current speed factor for Saab95 which is multiplied with 0.01 and turbo
-     * turbo is 1.3 if its on.
+     * SpeedFactor increses the speed of Saab95 by the turbo but only if its on
+     * @return the EnginePower of Saab95 with turbo on
      */
     @Override
     public double speedFactor() {

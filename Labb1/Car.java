@@ -63,7 +63,7 @@ public class Car implements Movable {
         } else if (dir == Direction.DOWN) {
             setY(getY() - currentSpeed);
         } else if (dir == Direction.LEFT) {
-            setY(getY() - currentSpeed);
+            setX(getX() - currentSpeed);
         }
     }
 
@@ -259,7 +259,7 @@ public class Car implements Movable {
     public String getModelName() {
         return modelName;
     }
-
+    
     /**
      * changes the current speed of the car
      *
