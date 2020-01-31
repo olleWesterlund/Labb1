@@ -123,10 +123,10 @@ public class Test {
     @org.junit.Test
     public void testCarMoveLeft() {
         saab95.setCurrentSpeed(2);
-        double xPosistion = saab95.getX();
+        double xPosition = saab95.getX();
         saab95.setDirection(Car.Direction.LEFT);
         saab95.move();
-        assertTrue(xPosistion > saab95.getX());
+        assertTrue(xPosition > saab95.getX());
     }
 
     @org.junit.Test
@@ -147,14 +147,14 @@ public class Test {
     public void testCarUpTurnLeft() {
         volvo240.setDirection(Car.Direction.UP);
         volvo240.turnLeft();
-        assertSame(volvo240.getDirection(),Car.Direction.LEFT);
+        assertSame(volvo240.getDirection(), Car.Direction.LEFT);
     }
 
     @org.junit.Test
     public void testCarDownTurnLeft() {
         volvo240.setDirection(Car.Direction.DOWN);
         volvo240.turnLeft();
-        assertSame(volvo240.getDirection(),Car.Direction.RIGHT);
+        assertSame(volvo240.getDirection(), Car.Direction.RIGHT);
     }
 
     @org.junit.Test
