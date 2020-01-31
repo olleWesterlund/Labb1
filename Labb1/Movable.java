@@ -1,4 +1,4 @@
-public interface Movable {
+interface Movable {
     /**
      * Method move used to move an object
      */

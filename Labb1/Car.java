@@ -255,7 +255,7 @@ public abstract class Car implements Movable {
     public String getModelName() {
         return modelName;
     }
-
+    
     /**
      * changes the current speed of the car
      *

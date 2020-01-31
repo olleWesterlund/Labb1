@@ -16,6 +16,7 @@ public class Test {
         volvo240 = new Volvo240();
     }
 
+
     @org.junit.Test
     public void testSaab95TurboOn() {
         saab95.setTurboOn();
@@ -34,6 +35,7 @@ public class Test {
         assertTrue(saab95.speedFactor() ==
                 saab95.getEnginePower() * 0.01 * 1.3);
     }
+
 
     @org.junit.Test
     public void testSaab96SpeedFactorNoTurbo() {
@@ -120,6 +122,7 @@ public class Test {
         assertTrue(yPosistion > saab95.getY());
     }
 
+
     @org.junit.Test
     public void testCarMoveLeft() {
         saab95.setCurrentSpeed(2);
@@ -129,12 +132,14 @@ public class Test {
         assertTrue(xPosition > saab95.getX());
     }
 
+
     @org.junit.Test
     public void testCarUpTurnRight() {
         volvo240.setDirection(Direction.UP);
         volvo240.turnRight();
         assertSame(volvo240.getDirection(), Direction.RIGHT);
     }
+
 
     @org.junit.Test
     public void testCarRightTurnRight() {
@@ -143,29 +148,33 @@ public class Test {
         assertSame(volvo240.getDirection(), Direction.DOWN);
     }
 
+
     @org.junit.Test
     public void testCarUpTurnLeft() {
         volvo240.setDirection(Direction.UP);
         volvo240.turnLeft();
-        assertSame(volvo240.getDirection(),Direction.LEFT);
+        assertSame(volvo240.getDirection(), Direction.LEFT);
     }
 
     @org.junit.Test
     public void testCarDownTurnLeft() {
         volvo240.setDirection(Direction.DOWN);
         volvo240.turnLeft();
-        assertSame(volvo240.getDirection(),Direction.RIGHT);
+        assertSame(volvo240.getDirection(), Direction.RIGHT);
     }
+
 
     @org.junit.Test
     public void testCarGetColor() {
         assertSame(saab95.getColor(), Color.red);
     }
 
+
     @org.junit.Test
     public void testCarGetModelName() {
         assertSame(volvo240.getModelName(), "Volvo240");
     }
+
 
     @org.junit.Test
     public void testCarStartEngine() {
@@ -178,5 +187,4 @@ public class Test {
     public void testCarGetNrDoors() {
         assertSame(volvo240.getNrDoors(), 4);
     }
-
 }
