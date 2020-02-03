@@ -3,8 +3,7 @@ import org.junit.Before;
 
 import java.awt.*;
 
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class Test {
     private Saab95 saab95;
@@ -16,7 +15,6 @@ public class Test {
         volvo240 = new Volvo240();
     }
 
-
     @org.junit.Test
     public void testSaab95TurboOn() {
         saab95.setTurboOn();
@@ -26,22 +24,20 @@ public class Test {
     @org.junit.Test
     public void testSaab95TurboOff() {
         saab95.setTurboOff();
-        assertTrue(!saab95.isTurboOn());
+        assertFalse(saab95.isTurboOn());
     }
 
     @org.junit.Test
     public void testSaab95SpeedFactorWithTurbo() {
         saab95.setTurboOn();
-        assertTrue(saab95.speedFactor() ==
-                saab95.getEnginePower() * 0.01 * 1.3);
+        assertEquals(saab95.speedFactor(), saab95.getEnginePower() * 0.01 * 1.3, 0.0);
     }
 
 
     @org.junit.Test
     public void testSaab96SpeedFactorNoTurbo() {
         saab95.setTurboOff();
-        assertTrue(saab95.speedFactor() ==
-                saab95.getEnginePower() * 0.01);
+        assertEquals(saab95.speedFactor(), saab95.getEnginePower() * 0.01, 0.0);
     }
 
     @org.junit.Test
@@ -76,8 +72,7 @@ public class Test {
 
     @org.junit.Test
     public void testVolvo240SpeedFactor() {
-        assertTrue(volvo240.speedFactor() ==
-                (0.01 * 1.25 * 100));
+        assertEquals(volvo240.speedFactor(), (0.01 * 1.25 * 100), 0.0);
     }
 
     @org.junit.Test
@@ -98,19 +93,19 @@ public class Test {
     @org.junit.Test
     public void testCarMoveUp() {
         saab95.setCurrentSpeed(2);
-        double yPosistion = saab95.getY();
+        double yPosition = saab95.getY();
         saab95.setDirection(Direction.UP);
         saab95.move();
-        assertTrue(yPosistion < saab95.getY());
+        assertTrue(yPosition < saab95.getY());
     }
 
     @org.junit.Test
     public void testCarMoveRight() {
         saab95.setCurrentSpeed(2);
-        double xPosistion = saab95.getX();
+        double xPosition = saab95.getX();
         saab95.setDirection(Direction.RIGHT);
         saab95.move();
-        assertTrue(xPosistion < saab95.getX());
+        assertTrue(xPosition < saab95.getX());
     }
 
     @org.junit.Test

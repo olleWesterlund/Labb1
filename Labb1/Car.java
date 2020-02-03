@@ -8,37 +8,11 @@ import java.awt.*;
  */
 
 public abstract class Car extends Vehicle {
-    /**
-     * Constructor for a car
-     *
-     * @param nrDoors      Number of doors on the car as an Integer
-     * @param enginePower  Engine power of the car as a Double
-     * @param currentSpeed The current speed of the var as a Double
-     * @param color        Color of the car
-     * @param modelName    Model name of the car as a String
-     * @param xPosition    The cars position on X-Axis as a Double
-     * @param yPosition    The cars position on Y-Axis as a Double
-     */
-    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, Direction direction, double xPosition, double yPosition) {
+    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName
+            , Direction direction, double xPosition, double yPosition) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, direction, xPosition, yPosition);
+        stopEngine();
     }
-
-    /**
-     * Moves the car with currentSpeed, if the direction of the car is UP or RIGHT
-     * then plus the currentSpeed, for LEFT and DOWN, currentSpeed is subtracted
-     */
-
-    /**
-     * Handles what directions to turn the car when turnRight is applied to a car.
-     * ex. if Car direction is LEFT and turnRight is applied, the car will have
-     * a new direction UP.
-     */
-
-    /**
-     * Handles what directions to turn the car of turnLeft is applied to a car.
-     * ex. if Car direction is RIGHT and turnLeft is applied, the car will have
-     * a new direction UP.
-     */
 
     /**
      * Speeds up the car with some value by calling incrementSpeed,
@@ -100,67 +74,4 @@ public abstract class Car extends Vehicle {
     protected double speedFactor() {
         return getEnginePower() * 0.01;
     }
-
-    /**
-     * @return the current direction of the car.
-     */
-
-    /**
-     * @param direction Holds a Direction for a car
-     * @return the direction of a car
-     */
-
-    /**
-     * @return x for the cars position on the X-axis
-     */
-
-    /**
-     * @return y for the cars position on the Y-axis
-     */
-
-    /**
-     * Set a new value for xPosition
-     *
-     * @param x double holds the new xPosition of a car on the X-axis
-     */
-
-    /**
-     * Changes Y-Coordinate
-     *
-     * @param y double holds the new yPosition of a car on the Y-Axis
-     */
-
-    /**
-     * Starts the engine and sets the speed to 0.1
-     */
-
-    /**
-     * Stops the engine and sets the currentSpeed to 0
-     */
-
-    /**
-     * @return returns the number of doors as an int
-     */
-
-    /**
-     * @return returns the power of the engine as a double
-     */
-
-    /**
-     * @return returns current speed of the car as a double
-     */
-
-    /**
-     * @return the color of the car
-     */
-
-    /**
-     * @return the name of the model
-     */
-
-    /**
-     * changes the current speed of the car
-     *
-     * @param currentSpeed holds the new currentSpeed as a double
-     */
 }
