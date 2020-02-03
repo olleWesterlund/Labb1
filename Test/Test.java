@@ -116,10 +116,10 @@ public class Test {
     @org.junit.Test
     public void testCarMoveDown() {
         saab95.setCurrentSpeed(2);
-        double yPosistion = saab95.getY();
+        double yPosition = saab95.getY();
         saab95.setDirection(Direction.DOWN);
         saab95.move();
-        assertTrue(yPosistion > saab95.getY());
+        assertTrue(yPosition > saab95.getY());
     }
 
 

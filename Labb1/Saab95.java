@@ -7,10 +7,11 @@ public class Saab95 extends Car {
      * Constructor for a Saab95 object
      */
     public Saab95() {
-        super(2,125, 0,Color.red,
-                "Saab95", 1,1, Direction.UP);
+        super(2, 125, 0, Color.red,
+                "Saab95", Direction.UP, 1, 1);
         turboOn = false;
     }
+
     /**
      * sets the turbo for a Saab95 object on
      */
@@ -27,6 +28,7 @@ public class Saab95 extends Car {
 
     /**
      * Checks if turbo is on for Saab95, returns true if turbo is on
+     *
      * @return true if the turbo is on, false if turbo is off
      */
     public boolean isTurboOn() {
@@ -35,6 +37,7 @@ public class Saab95 extends Car {
 
     /**
      * SpeedFactor increses the speed of Saab95 by the turbo but only if its on
+     *
      * @return the EnginePower of Saab95 with turbo on
      */
     @Override

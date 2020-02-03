@@ -9,10 +9,12 @@ public class Volvo240 extends Car {
      */
     public Volvo240() {
         super(4, 100, 0, Color.BLACK,
-                "Volvo240", 0, 0, Direction.UP);
+                "Volvo240", Direction.UP, 0, 0);
     }
+
     /**
      * SpeedFactor increses the speed of the car by the trimFactor
+     *
      * @return the enginePower multiplied with 0.01 and trimFactor(1.25)
      */
     @Override
