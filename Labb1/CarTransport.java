@@ -7,28 +7,6 @@ public class CarTransport extends Truck {
 
     public CarTransport() {
         super(2, 420, 0, Color.PINK, "Transporter Deluxe", Direction.UP, 5, 10);
-        this.truckBed = new TruckBed();
-    }
-
-    public void setTruckBed() {
-        if (isTruckBedDown()) {
-            truckBedUp();
-        } else {
-            truckBedDown();
-        }
-    }
-
-    @Override
-    public void truckBedDown() {
-        if (getCurrentSpeed() == 0) {
-            setTruckBedDown(true);
-        } else {
-            throw new IllegalArgumentException("Can't move ramp while driving");
-        }
-    }
-
-    @Override
-    public void truckBedUp() {
-        setTruckBedDown(false);
+        this.truckBed = new TruckBed(-70, true, -70, 40);
     }
 }

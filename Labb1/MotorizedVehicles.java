@@ -147,8 +147,9 @@ public abstract class MotorizedVehicles implements Movable {
     }
 
     /**
+     * changes the current direction of the vehicle
+     *
      * @param direction Holds a Direction for a vehicle
-     * @return the direction of a vehicle
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
@@ -157,15 +158,15 @@ public abstract class MotorizedVehicles implements Movable {
     /**
      * changes the current speed of the vehicle
      *
-     * @param currentSpeed holds the new currentSpeed as a double
+     * @param newSpeed holds the new speed as a double
      */
-    protected void setCurrentSpeed(double currentSpeed) {
-        if (currentSpeed > getEnginePower()) {
-            this.currentSpeed = getEnginePower();
-        } else if (currentSpeed < 0) {
+    protected void setCurrentSpeed(double newSpeed) {
+        if (newSpeed > enginePower) {
+            this.currentSpeed = enginePower;
+        } else if (newSpeed < 0) {
             this.currentSpeed = 0;
         } else {
-            this.currentSpeed = currentSpeed;
+            this.currentSpeed = newSpeed;
         }
     }
 
@@ -184,13 +185,13 @@ public abstract class MotorizedVehicles implements Movable {
      * Starts the engine and sets the speed to 0.1
      */
     protected void startEngine() {
-        setCurrentSpeed(0.1);
+        currentSpeed = 0.1;
     }
 
     /**
      * Stops the engine and sets the currentSpeed to 0
      */
     protected void stopEngine() {
-        setCurrentSpeed(0);
+        currentSpeed = 0;
     }
 }

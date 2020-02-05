@@ -19,17 +19,18 @@ public abstract class Truck extends MotorizedVehicles {
      *
      * @param newSpeed holds the new speed as a double
      */
-    @Override
-    protected void setCurrentSpeed(double newSpeed) {
-        if ( > 0 || ){
+
+    protected void setCurrentSpeed(double newSpeed, TruckBed truckBed) {
+        if (!truckBed.isTruckBedMinDegree()) {
             throw new IllegalArgumentException("Can't drive while truck bed is up");
-        }
-        if (newSpeed > maxSpeed) {
-            this.currentSpeed = maxSpeed;
-        } else if (newSpeed < 0) {
-            this.currentSpeed = 0;
         } else {
-            this.currentSpeed = newSpeed;
+            if (newSpeed > maxSpeed) {
+                this.currentSpeed = maxSpeed;
+            } else if (newSpeed < 0) {
+                this.currentSpeed = 0;
+            } else {
+                this.currentSpeed = newSpeed;
+            }
         }
     }
 }
