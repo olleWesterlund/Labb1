@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Vehicle implements Movable {
+public abstract class MotorizedVehicles implements Movable {
     private double enginePower; // Engine power of the vehicle
     protected double currentSpeed; // The current speed of the vehicle
     private Color color; // Color of the vehicle
@@ -12,7 +12,7 @@ public abstract class Vehicle implements Movable {
     /**
      * Constructor for a vehicle
      *
-     * @param enginePower  Engine power of the car as a Double
+     * @param enginePower  Engine power of the vehicle as a Double
      * @param currentSpeed The current speed of the vehicle as a Double
      * @param color        Color of the vehicle
      * @param direction    Starting direction of the vehicle
@@ -20,7 +20,7 @@ public abstract class Vehicle implements Movable {
      * @param xPosition    The position of the vehicle on X-Axis as a Double
      * @param yPosition    The position of the vehicle on Y-Axis as a Double
      */
-    public Vehicle(double enginePower, double currentSpeed, Color color, String modelName, Direction direction, double xPosition, double yPosition) {
+    public MotorizedVehicles(double enginePower, double currentSpeed, Color color, String modelName, Direction direction, double xPosition, double yPosition) {
         this.enginePower = enginePower;
         this.currentSpeed = currentSpeed;
         this.color = color;

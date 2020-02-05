@@ -7,7 +7,7 @@ import java.awt.*;
  * @Author Olle Westerlund
  */
 
-public abstract class Car extends Vehicle {
+public abstract class Car extends MotorizedVehicles {
     private int nrDoors; // Number of doors on the vehicle
 
     /**
