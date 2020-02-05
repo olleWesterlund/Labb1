@@ -1,13 +1,28 @@
 import java.awt.*;
 
 public abstract class Truck extends Vehicle implements TruckBed {
+    private int nrDoors; // Number of doors on the vehicle
     private int currentDegree; // Current degree of the truck bed
+    private boolean isTruckBedDown;
 
+    /**
+     * @param nrDoors Number of doors on the car as an Integer
+     */
     public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName,
                  Direction direction, double xPosition, double yPosition) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, direction, xPosition, yPosition);
+        super(enginePower, currentSpeed, color, modelName, direction, xPosition, yPosition);
         this.currentDegree = 0;
+        this.isTruckBedDown = false;
+        this.nrDoors = nrDoors;
         stopEngine();
+    }
+
+    public boolean isTruckBedDown() {
+        return isTruckBedDown;
+    }
+
+    public void setTruckBedDown(boolean truckBedDown) {
+        isTruckBedDown = truckBedDown;
     }
 
     public int getCurrentDegree() {

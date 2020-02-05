@@ -8,9 +8,15 @@ import java.awt.*;
  */
 
 public abstract class Car extends Vehicle {
+    private int nrDoors; // Number of doors on the vehicle
+
+    /**
+     * @param nrDoors Number of doors on the car as an Integer
+     */
     public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName
             , Direction direction, double xPosition, double yPosition) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, direction, xPosition, yPosition);
+        super(enginePower, currentSpeed, color, modelName, direction, xPosition, yPosition);
+        this.nrDoors = nrDoors;
         stopEngine();
     }
 

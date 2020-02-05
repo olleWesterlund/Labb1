@@ -2,7 +2,6 @@ import java.awt.*;
 
 public abstract class Vehicle implements Movable {
     private double enginePower; // Engine power of the vehicle
-    private int nrDoors; // Number of doors on the vehicle
     protected double currentSpeed; // The current speed of the vehicle
     private Color color; // Color of the vehicle
     private String modelName; // The vehicle model name
@@ -13,7 +12,6 @@ public abstract class Vehicle implements Movable {
     /**
      * Constructor for a vehicle
      *
-     * @param nrDoors      Number of doors on the car as an Integer
      * @param enginePower  Engine power of the car as a Double
      * @param currentSpeed The current speed of the vehicle as a Double
      * @param color        Color of the vehicle
@@ -22,8 +20,7 @@ public abstract class Vehicle implements Movable {
      * @param xPosition    The position of the vehicle on X-Axis as a Double
      * @param yPosition    The position of the vehicle on Y-Axis as a Double
      */
-    public Vehicle(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, Direction direction, double xPosition, double yPosition) {
-        this.nrDoors = nrDoors;
+    public Vehicle(double enginePower, double currentSpeed, Color color, String modelName, Direction direction, double xPosition, double yPosition) {
         this.enginePower = enginePower;
         this.currentSpeed = currentSpeed;
         this.color = color;
@@ -181,13 +178,6 @@ public abstract class Vehicle implements Movable {
 
     public void setEnginePower(double enginePower) {
         this.enginePower = enginePower;
-    }
-
-    /**
-     * @return returns the number of doors as an int
-     */
-    public int getNrDoors() {
-        return nrDoors;
     }
 
     /**
