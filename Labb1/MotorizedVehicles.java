@@ -177,10 +177,6 @@ public abstract class MotorizedVehicles implements Movable {
         return enginePower;
     }
 
-    public void setEnginePower(double enginePower) {
-        this.enginePower = enginePower;
-    }
-
     /**
      * Starts the engine and sets the speed to 0.1
      */

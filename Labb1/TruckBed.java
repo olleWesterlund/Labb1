@@ -11,20 +11,8 @@ public class TruckBed implements MovableTruckBed {
         this.maxDegree = maxDegree;
     }
 
-    public int getMaxDegree() {
-        return maxDegree;
-    }
-
-    public int getMinDegree() {
-        return minDegree;
-    }
-
     public int getCurrentDegree() {
         return currentDegree;
-    }
-
-    public void setCurrentDegree(int currentDegree) {
-        this.currentDegree = currentDegree;
     }
 
     public boolean isReadyToDrive() {

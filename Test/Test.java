@@ -22,6 +22,8 @@ public class Test {
         scania = new Scania();
         transportTruckBed = carTransport.getTruckBed();
         scaniaTruckBed = scania.getTruckBed();
+        volvo240.setY(carTransport.getY() - 2);
+        volvo240.setX(carTransport.getX() - 2);
     }
 
     @org.junit.Test
@@ -219,8 +221,6 @@ public class Test {
     @org.junit.Test
     public void testUpdateLoadedCarPositions() {
         transportTruckBed.setTruckBed(carTransport);
-        volvo240.setY(carTransport.getY() - 2);
-        volvo240.setX(carTransport.getX() - 2);
         carTransport.loadCars(volvo240);
         transportTruckBed.setTruckBed(carTransport);
         carTransport.setCurrentSpeed(70, transportTruckBed);
@@ -237,8 +237,6 @@ public class Test {
     @org.junit.Test
     public void testLoadVolvo240OnCarTransportSize() {
         transportTruckBed.setTruckBed(carTransport);
-        volvo240.setY(carTransport.getY() - 2);
-        volvo240.setX(carTransport.getX() - 2);
         carTransport.loadCars(volvo240);
         assertSame(carTransport.getCarsOnTransport().size(), 1);
     }
@@ -246,8 +244,6 @@ public class Test {
     @org.junit.Test
     public void testLoadVolvo240OnCarTransportContainsVolvo240() {
         transportTruckBed.setTruckBed(carTransport);
-        volvo240.setX(carTransport.getX() - 2);
-        volvo240.setY(carTransport.getY() - 2);
         carTransport.loadCars(volvo240);
         assertEquals(carTransport.getCarsOnTransport().getFirst(), volvo240);
     }
@@ -255,18 +251,22 @@ public class Test {
     @org.junit.Test
     public void testUnloadVolvo240FromCarTransportSize() {
         transportTruckBed.setTruckBed(carTransport);
-        volvo240.setY(carTransport.getY() - 2);
-        volvo240.setX(carTransport.getX() - 2);
         carTransport.loadCars(volvo240);
         carTransport.unloadCars();
         assertEquals(0, carTransport.getCarsOnTransport().size());
     }
 
     @org.junit.Test
-    public void testUnloadVolvo240FromCarTransport() {
+    public void testUnloadVolvo240FromCarTransportPositionCorrect() {
         transportTruckBed.setTruckBed(carTransport);
-        volvo240.setX(carTransport.getX() - 2);
-        volvo240.setY(carTransport.getX() - 2);
         carTransport.loadCars(volvo240);
+        carTransport.unloadCars();
+        assertEquals(volvo240.getX(), carTransport.getX() + 1, 0.0);
+    }
+
+    @org.junit.Test
+    public void testScaniaSetTruckBed() {
+        scaniaTruckBed.setTruckBed(60, scania);
+        assertEquals(60, scaniaTruckBed.getCurrentDegree());
     }
 }
