@@ -3,16 +3,22 @@ import java.awt.*;
 public abstract class Truck extends MotorizedVehicles {
     private int nrDoors; // Number of doors on the vehicle
     private double maxSpeed;
+    private TruckBed truckBed;
 
     /**
      * @param nrDoors Number of doors on the car as an Integer
      */
     public Truck(int nrDoors, double enginePower, double currentSpeed, double maxSpeed, Color color, String modelName,
-                 Direction direction, double xPosition, double yPosition) {
+                 Direction direction, double xPosition, double yPosition, TruckBed truckBed) {
         super(enginePower, currentSpeed, color, modelName, direction, xPosition, yPosition);
         this.nrDoors = nrDoors;
         this.maxSpeed = maxSpeed;
+        this.truckBed = truckBed;
         stopEngine();
+    }
+
+    public TruckBed getTruckBed() {
+        return truckBed;
     }
 
     /**

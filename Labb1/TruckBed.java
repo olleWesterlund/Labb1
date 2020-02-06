@@ -37,12 +37,12 @@ public class TruckBed implements MovableTruckBed {
                 while (currentDegree < maxDegree) {
                     truckBedUp();
                 }
-                isReadyToDrive = true;
+                isReadyToDrive = false;
             } else {
                 while (currentDegree > minDegree) {
                     truckBedDown();
                 }
-                isReadyToDrive = false;
+                isReadyToDrive = true;
             }
         } else {
             throw new IllegalArgumentException("Can't set truck bed while driving");

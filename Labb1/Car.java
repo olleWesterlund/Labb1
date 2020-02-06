@@ -80,4 +80,8 @@ public abstract class Car extends MotorizedVehicles {
     protected double speedFactor() {
         return getEnginePower() * 0.01;
     }
+
+    public int getNrDoors() {
+        return nrDoors;
+    }
 }

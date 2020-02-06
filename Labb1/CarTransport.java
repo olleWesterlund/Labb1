@@ -5,12 +5,12 @@ import java.util.Deque;
 public class CarTransport extends Truck {
     private int maxCars = 4;
     private int loadedCars = 0;
-    private TruckBed truckBed;
     private Deque<Car> carsOnTransport;
 
     public CarTransport() {
-        super(2, 420, 0, 90, Color.PINK, "Transporter Deluxe", Direction.UP, 5, 10);
-        this.truckBed = new TruckBed(0, true, 0, 20);
+        super(2, 420, 0, 90, Color.PINK,
+                "Transporter Deluxe", Direction.UP, 5, 10,
+                new TruckBed(0, true, 0, 20));
         this.carsOnTransport = new ArrayDeque<>();
     }
 
@@ -34,19 +34,21 @@ public class CarTransport extends Truck {
 
     public void updateLoadedCarPositions() {
         for (Car c : carsOnTransport) {
-            while (currentSpeed != 0) {
-                c.setY(getY());
-                c.setX(getX());
-            }
+            c.setY(getY());
+            c.setX(getX());
         }
     }
 
     public void unloadCars() {
         if (isReadyToUnloadCars()) {
-            Car firstCar = carsOnTransport.getFirst();
-            carsOnTransport.pop();
-            firstCar.setY(getY() - 3);
-            firstCar.setX(getX() - 3);
+            double x = getX() + 1;
+            while (!carsOnTransport.isEmpty()) {
+                Car firstCar = carsOnTransport.getFirst();
+                carsOnTransport.pop();
+                firstCar.setY(getY() - 1);
+                firstCar.setX(x);
+                x++;
+            }
         } else {
             throw new IllegalArgumentException("Car transport not ready to unload cars!");
         }
@@ -66,14 +68,18 @@ public class CarTransport extends Truck {
     }
 
     public boolean isReadyToLoadCars() {
-        return currentSpeed == 0 && loadedCars < maxCars && !truckBed.isReadyToDrive();
+        return currentSpeed == 0 && loadedCars < maxCars && !getTruckBed().isReadyToDrive();
     }
 
     public boolean isReadyToUnloadCars() {
-        return currentSpeed == 0 && !truckBed.isReadyToDrive();
+        return currentSpeed == 0 && !getTruckBed().isReadyToDrive();
     }
 
     public boolean isCarCloseToTruck(Car car) {
         return getX() - car.getX() <= 3 && getY() - car.getY() <= 3;
+    }
+
+    public Deque<Car> getCarsOnTransport() {
+        return carsOnTransport;
     }
 }
