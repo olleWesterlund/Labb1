@@ -1,12 +1,12 @@
 public class TruckBed implements MovableTruckBed {
     private int currentDegree; // Current degree of the truck bed
-    private boolean isTruckBedMinDegree;
+    private boolean isReadyToDrive;
     private final int maxDegree;
     private final int minDegree;
 
-    public TruckBed(int currentDegree, boolean isTruckBedMinDegree, int minDegree, int maxDegree) {
+    public TruckBed(int currentDegree, boolean isReadyToDrive, int minDegree, int maxDegree) {
         this.currentDegree = currentDegree;
-        this.isTruckBedMinDegree = isTruckBedMinDegree;
+        this.isReadyToDrive = isReadyToDrive;
         this.minDegree = minDegree;
         this.maxDegree = maxDegree;
     }
@@ -27,8 +27,8 @@ public class TruckBed implements MovableTruckBed {
         this.currentDegree = currentDegree;
     }
 
-    public boolean isTruckBedMinDegree() {
-        return isTruckBedMinDegree;
+    public boolean isReadyToDrive() {
+        return isReadyToDrive;
     }
 
     public void setTruckBed(Truck truck) {
@@ -37,12 +37,12 @@ public class TruckBed implements MovableTruckBed {
                 while (currentDegree < maxDegree) {
                     truckBedUp();
                 }
-                isTruckBedMinDegree = true;
+                isReadyToDrive = true;
             } else {
                 while (currentDegree > minDegree) {
                     truckBedDown();
                 }
-                isTruckBedMinDegree = false;
+                isReadyToDrive = false;
             }
         } else {
             throw new IllegalArgumentException("Can't set truck bed while driving");
@@ -58,13 +58,13 @@ public class TruckBed implements MovableTruckBed {
                     while (currentDegree < degree) {
                         truckBedUp();
                     }
-                    isTruckBedMinDegree = false;
+                    isReadyToDrive = false;
                 } else if (currentDegree > degree) {
                     while (currentDegree > degree) {
                         truckBedDown();
                     }
                     if (currentDegree == 0) {
-                        isTruckBedMinDegree = true;
+                        isReadyToDrive = true;
                     }
                 }
             }

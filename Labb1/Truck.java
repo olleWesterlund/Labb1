@@ -2,15 +2,16 @@ import java.awt.*;
 
 public abstract class Truck extends MotorizedVehicles {
     private int nrDoors; // Number of doors on the vehicle
-    private int maxSpeed = 90;
+    private double maxSpeed;
 
     /**
      * @param nrDoors Number of doors on the car as an Integer
      */
-    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName,
+    public Truck(int nrDoors, double enginePower, double currentSpeed, double maxSpeed, Color color, String modelName,
                  Direction direction, double xPosition, double yPosition) {
         super(enginePower, currentSpeed, color, modelName, direction, xPosition, yPosition);
         this.nrDoors = nrDoors;
+        this.maxSpeed = maxSpeed;
         stopEngine();
     }
 
@@ -21,7 +22,7 @@ public abstract class Truck extends MotorizedVehicles {
      */
 
     protected void setCurrentSpeed(double newSpeed, TruckBed truckBed) {
-        if (!truckBed.isTruckBedMinDegree()) {
+        if (!truckBed.isReadyToDrive()) {
             throw new IllegalArgumentException("Can't drive while truck bed is up");
         } else {
             if (newSpeed > maxSpeed) {
