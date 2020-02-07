@@ -1,24 +1,24 @@
 import java.awt.*;
 
 public abstract class MotorizedVehicles implements Movable {
-    private double enginePower; // Engine power of the vehicle
-    protected double currentSpeed; // The current speed of the vehicle
-    private Color color; // Color of the vehicle
-    private String modelName; // The vehicle model name
-    private Direction direction; // Direction of the vehicle
-    private double xPosition; // Position of the vehicle on X-Axis
-    private double yPosition; // Position of the vehicle on Y-Axis
+    private double enginePower;
+    protected double currentSpeed;
+    private Color color;
+    private String modelName;
+    private Direction direction;
+    private double xPosition;
+    private double yPosition;
 
     /**
      * Constructor for a vehicle
      *
-     * @param enginePower  Engine power of the vehicle as a Double
-     * @param currentSpeed The current speed of the vehicle as a Double
-     * @param color        Color of the vehicle
-     * @param direction    Starting direction of the vehicle
-     * @param modelName    Model name of the vehicle as a String
-     * @param xPosition    The position of the vehicle on X-Axis as a Double
-     * @param yPosition    The position of the vehicle on Y-Axis as a Double
+     * @param enginePower  Engine power of the vehicle as a Double.
+     * @param currentSpeed The current speed of the vehicle as a Double.
+     * @param color        Color of the vehicle.
+     * @param direction    Starting direction of the vehicle.
+     * @param modelName    Model name of the vehicle as a String.
+     * @param xPosition    The position of the vehicle on X-Axis as a Double.
+     * @param yPosition    The position of the vehicle on Y-Axis as a Double.
      */
     public MotorizedVehicles(double enginePower, double currentSpeed, Color color, String modelName, Direction direction, double xPosition, double yPosition) {
         this.enginePower = enginePower;
@@ -32,7 +32,7 @@ public abstract class MotorizedVehicles implements Movable {
 
     /**
      * Moves the vehicle with currentSpeed, if the direction of the vehicle is UP or RIGHT
-     * then plus the currentSpeed, for LEFT and DOWN, currentSpeed is subtracted
+     * then plus the currentSpeed, for LEFT and DOWN, currentSpeed is subtracted.
      */
     @Override
     public void move() {
@@ -94,71 +94,71 @@ public abstract class MotorizedVehicles implements Movable {
     }
 
     /**
-     * @return x for the position of a vehicle on the X-axis
+     * @return x for the position of a vehicle on the X-axis.
      */
     public double getX() {
         return xPosition;
     }
 
     /**
-     * @return y for the position of a vehicle on the Y-axis
+     * @return y for the position of a vehicle on the Y-axis.
      */
     public double getY() {
         return yPosition;
     }
 
     /**
-     * Set a new value for xPosition
+     * Sets a new value for xPosition.
      *
-     * @param x double holds the new xPosition of a vehicle on the X-axis
+     * @param x double holds the new xPosition of a vehicle on the X-axis.
      */
     protected void setX(double x) {
         this.xPosition = x;
     }
 
     /**
-     * Changes Y-Coordinate
+     * Sets a new value for yPosition.
      *
-     * @param y double holds the new yPosition of a vehicle on the Y-Axis
+     * @param y double holds the new yPosition of a vehicle on the Y-Axis.
      */
     protected void setY(double y) {
         this.yPosition = y;
     }
 
     /**
-     * @return returns current speed of the vehicle as a double
+     * @return the current speed of the vehicle as a double.
      */
     public double getCurrentSpeed() {
         return currentSpeed;
     }
 
     /**
-     * @return the color of the vehicle
+     * @return the color of the vehicle.
      */
     public Color getColor() {
         return color;
     }
 
     /**
-     * @return the name of the model
+     * @return the model name of the Vehicle.
      */
     public String getModelName() {
         return modelName;
     }
 
     /**
-     * changes the current direction of the vehicle
+     * changes the current direction of the vehicle.
      *
-     * @param direction Holds a Direction for a vehicle
+     * @param direction Holds a Direction for a vehicle.
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
     /**
-     * changes the current speed of the vehicle
+     * changes the current speed of the vehicle.
      *
-     * @param newSpeed holds the new speed as a double
+     * @param newSpeed holds the new speed as a double.
      */
     protected void setCurrentSpeed(double newSpeed) {
         if (newSpeed > enginePower) {
@@ -171,21 +171,21 @@ public abstract class MotorizedVehicles implements Movable {
     }
 
     /**
-     * @return returns the power of the engine as a double
+     * @return returns the power of the engine as a double.
      */
     public double getEnginePower() {
         return enginePower;
     }
 
     /**
-     * Starts the engine and sets the speed to 0.1
+     * Starts the engine and sets the speed to 0.1.
      */
     protected void startEngine() {
         currentSpeed = 0.1;
     }
 
     /**
-     * Stops the engine and sets the currentSpeed to 0
+     * Stops the engine and sets the currentSpeed to 0.
      */
     protected void stopEngine() {
         currentSpeed = 0;

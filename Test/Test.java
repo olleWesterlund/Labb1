@@ -197,7 +197,7 @@ public class Test {
     @org.junit.Test
     public void testMoveCarTransport() {
         double transportY = carTransport.getY();
-        carTransport.setCurrentSpeed(70, transportTruckBed);
+        carTransport.setCurrentSpeed(70);
         double currentSpeed = carTransport.getCurrentSpeed();
         carTransport.move();
         assertEquals(carTransport.getY(), transportY + currentSpeed, 0.0);
@@ -223,7 +223,7 @@ public class Test {
         transportTruckBed.setTruckBed(carTransport);
         carTransport.loadCars(volvo240);
         transportTruckBed.setTruckBed(carTransport);
-        carTransport.setCurrentSpeed(70, transportTruckBed);
+        carTransport.setCurrentSpeed(70);
         carTransport.move();
         assertEquals(carTransport.getY(), volvo240.getY(), 0.0);
     }
