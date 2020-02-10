@@ -287,7 +287,6 @@ public class Test {
     public void testAddSaab95toVolvo240Workshop() {
         volvoService.putCarInWorkshop(saab95);
     }
-
      */
 
     @org.junit.Test
@@ -302,5 +301,10 @@ public class Test {
         volvoService.putCarInWorkshop(volvo240);
         volvoService.getCarFromWorkshop(volvo240);
         assertEquals(0, volvoService.carsInWorkshop.size());
+    }
+
+    @org.junit.Test
+    public void testGetMaxNrOfCarsAWorkshopCanHandle() {
+        assertEquals(10, volvoService.getMaxNrOfCars());
     }
 }
