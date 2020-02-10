@@ -30,7 +30,7 @@ public abstract class Car extends MotorizedVehicles {
         if (amount >= 0 && amount <= 1) {
             this.incrementSpeed(amount);
         } else {
-            throw new IllegalArgumentException("Gas only takes a value between [0.1]");
+            throw new IllegalArgumentException("Gas only takes a value between [0-1]");
         }
     }
 
