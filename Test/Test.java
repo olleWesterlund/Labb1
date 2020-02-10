@@ -12,6 +12,9 @@ public class Test {
     private Scania scania;
     private TruckBed transportTruckBed;
     private TruckBed scaniaTruckBed;
+    private Workshop<Volvo240> volvoService;
+    private Workshop<Saab95> saabService;
+    private Workshop<Car> carService;
 
 
     @Before
@@ -24,6 +27,9 @@ public class Test {
         scaniaTruckBed = scania.getTruckBed();
         volvo240.setY(carTransport.getY() - 2);
         volvo240.setX(carTransport.getX() - 2);
+        volvoService = new Workshop<>(10);
+        saabService = new Workshop<>(10);
+        carService = new Workshop<>(10);
     }
 
     @org.junit.Test
@@ -268,5 +274,33 @@ public class Test {
     public void testScaniaSetTruckBed() {
         scaniaTruckBed.setTruckBed(60, scania);
         assertEquals(60, scaniaTruckBed.getCurrentDegree());
+    }
+
+    @org.junit.Test
+    public void testAddVolvo240ToVolvo240WorkshopSize() {
+        volvoService.putCarInWorkshop(volvo240);
+        assertEquals(1, volvoService.carsInWorkshop.size());
+    }
+
+    /*
+    @org.junit.Test
+    public void testAddSaab95toVolvo240Workshop() {
+        volvoService.putCarInWorkshop(saab95);
+    }
+
+     */
+
+    @org.junit.Test
+    public void testAddVolvo240AndSaab95ToCarWorkshopSize() {
+        carService.putCarInWorkshop(volvo240);
+        carService.putCarInWorkshop(saab95);
+        assertEquals(2, carService.carsInWorkshop.size());
+    }
+
+    @org.junit.Test
+    public void testGetVolvo240FromWorkshopSize() {
+        volvoService.putCarInWorkshop(volvo240);
+        volvoService.getCarFromWorkshop(volvo240);
+        assertEquals(0, volvoService.carsInWorkshop.size());
     }
 }
