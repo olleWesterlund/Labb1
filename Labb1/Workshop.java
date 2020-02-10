@@ -11,17 +11,22 @@ public class Workshop<T extends Car> {
     }
 
     public void putCarInWorkshop(T car) {
-        if (carsInWorkshop.size() < maxNrOfCars) {
-            carsInWorkshop.add(car);
+        if (carsInWorkshop.size() >= maxNrOfCars) {
+            throw new IllegalArgumentException("Workshop is full, come back another time!");
         } else {
-            throw new IllegalArgumentException("Workshop is full");
+            carsInWorkshop.add(car);
         }
     }
 
     public void getCarFromWorkshop(T car) {
-        carsInWorkshop.remove(car);
+        if (carsInWorkshop.size() > 0) {
+            carsInWorkshop.remove(car);
+        } else {
+            throw new IllegalArgumentException("Workshop is empty");
+        }
     }
 
-
-
+    public int getMaxNrOfCars() {
+        return maxNrOfCars;
+    }
 }
