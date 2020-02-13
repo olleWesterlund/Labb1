@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Truck extends MotorizedVehicles {
+public abstract class Truck extends MotorizedVehicle {
     private int nrDoors;
     private final double maxSpeed;
     private TruckBed truckBed;
