@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Workshop<T extends Car> {
-
     private final int maxNrOfCars;
     protected List<T> carsInWorkshop;
 
