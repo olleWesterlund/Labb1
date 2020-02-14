@@ -47,4 +47,65 @@ public abstract class Truck extends MotorizedVehicles {
             }
         }
     }
+
+    /**
+     * Sets TruckBed to the value of parameter degree if it's in the range of minDegree and maxDegree.
+     *
+     * @param degree the degree that we want to set the current degree of the TruckBed to.
+     */
+    public void setTruckBed(int degree) {
+        int currentDegree = getTruckBed().getCurrentDegree();
+        int minDegree = getTruckBed().getMinDegree();
+        int maxDegree = getTruckBed().getMaxDegree();
+        if (getCurrentSpeed() == 0) {
+            if (degree < minDegree || degree > maxDegree) {
+                throw new IllegalArgumentException("degree must be in range [" + minDegree + "," + maxDegree + "]");
+            } else {
+                if (currentDegree < degree) {
+                    while (currentDegree < degree) {
+                        getTruckBed().truckBedUp();
+                        currentDegree = getTruckBed().getCurrentDegree();
+                    }
+                    getTruckBed().setReadyToDrive(false);
+                } else if (currentDegree > degree) {
+                    while (currentDegree > degree) {
+                        getTruckBed().truckBedDown();
+                        currentDegree = getTruckBed().getCurrentDegree();
+                    }
+                    if (currentDegree == 0) {
+                        getTruckBed().setReadyToDrive(true);
+                    }
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("Can't set truck bed while driving");
+        }
+    }
+
+
+    /**
+     * Sets TruckBed up or down depending on the previous mode.
+     */
+    public void setTruckBed() {
+        int currentDegree = getTruckBed().getCurrentDegree();
+        int minDegree = getTruckBed().getMinDegree();
+        int maxDegree = getTruckBed().getMaxDegree();
+        if (getCurrentSpeed() == 0) {
+            if (currentDegree == minDegree) {
+                while (currentDegree < maxDegree) {
+                    getTruckBed().truckBedUp();
+                    currentDegree = getTruckBed().getCurrentDegree();
+                }
+                getTruckBed().setReadyToDrive(false);
+            } else {
+                while (currentDegree > minDegree) {
+                    getTruckBed().truckBedDown();
+                    currentDegree = getTruckBed().getCurrentDegree();
+                }
+                getTruckBed().setReadyToDrive(true);
+            }
+        } else {
+            throw new IllegalArgumentException("Can't set truck bed while driving");
+        }
+    }
 }

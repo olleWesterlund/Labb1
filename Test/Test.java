@@ -226,9 +226,9 @@ public class Test {
 
     @org.junit.Test
     public void testUpdateLoadedCarPositions() {
-        transportTruckBed.setTruckBed(carTransport);
+        carTransport.setTruckBed();
         carTransport.loadCars(volvo240);
-        transportTruckBed.setTruckBed(carTransport);
+        carTransport.setTruckBed();
         carTransport.setCurrentSpeed(70);
         carTransport.move();
         assertEquals(carTransport.getY(), volvo240.getY(), 0.0);
@@ -236,27 +236,27 @@ public class Test {
 
     @org.junit.Test
     public void testSetTruckBedForCarTransport() {
-        transportTruckBed.setTruckBed(carTransport);
+        carTransport.setTruckBed();
         assertFalse(transportTruckBed.isReadyToDrive());
     }
 
     @org.junit.Test
     public void testLoadVolvo240OnCarTransportSize() {
-        transportTruckBed.setTruckBed(carTransport);
+        carTransport.setTruckBed();
         carTransport.loadCars(volvo240);
         assertSame(carTransport.getCarsOnTransport().size(), 1);
     }
 
     @org.junit.Test
     public void testLoadVolvo240OnCarTransportContainsVolvo240() {
-        transportTruckBed.setTruckBed(carTransport);
+        carTransport.setTruckBed();
         carTransport.loadCars(volvo240);
         assertEquals(carTransport.getCarsOnTransport().getFirst(), volvo240);
     }
 
     @org.junit.Test
     public void testUnloadVolvo240FromCarTransportSize() {
-        transportTruckBed.setTruckBed(carTransport);
+        carTransport.setTruckBed();
         carTransport.loadCars(volvo240);
         carTransport.unloadCars();
         assertEquals(0, carTransport.getCarsOnTransport().size());
@@ -264,7 +264,7 @@ public class Test {
 
     @org.junit.Test
     public void testUnloadVolvo240FromCarTransportPositionCorrect() {
-        transportTruckBed.setTruckBed(carTransport);
+        carTransport.setTruckBed();
         carTransport.loadCars(volvo240);
         carTransport.unloadCars();
         assertEquals(volvo240.getX(), carTransport.getX() + 1, 0.0);
@@ -272,7 +272,7 @@ public class Test {
 
     @org.junit.Test
     public void testScaniaSetTruckBed() {
-        scaniaTruckBed.setTruckBed(60, scania);
+        scania.setTruckBed(60);
         assertEquals(60, scaniaTruckBed.getCurrentDegree());
     }
 
