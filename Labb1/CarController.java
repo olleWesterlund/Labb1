@@ -21,7 +21,8 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of vehicle, modify if needed
-    ArrayList<MotorizedVehicles> vehicles = new ArrayList<>();
+
+    ArrayList<MotorizedVehicle> vehicles = new ArrayList<>();
 
     //methods:
 
@@ -45,7 +46,9 @@ public class CarController {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (MotorizedVehicles vehicle : vehicles) {
+
+            for (MotorizedVehicle vehicle : vehicles) {
+
                 vehicle.move();
                 int x = (int) Math.round(vehicle.getX());
                 int y = (int) Math.round(vehicle.getY());
@@ -69,32 +72,32 @@ public class CarController {
     // Calls the gas method for each vehicle once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (MotorizedVehicles vehicle : vehicles) {
+        for (MotorizedVehicle vehicle : vehicles) {
             vehicle.gas(gas);
         }
     }
 
     void breaks(int amount) {
         double breaks = ((double) amount) / 100;
-        for (MotorizedVehicles vehicle : vehicles) {
+        for (MotorizedVehicle vehicle : vehicles) {
             vehicle.brake(breaks);
         }
     }
 
     void turnLeft() {
-        for (MotorizedVehicles vehicle : vehicles) {
+        for (MotorizedVehicle vehicle : vehicles) {
             vehicle.turnLeft();
         }
     }
 
     void turnRight() {
-        for (MotorizedVehicles vehicle : vehicles) {
+        for (MotorizedVehicle vehicle : vehicles) {
             vehicle.turnRight();
         }
     }
 
     void setTurboOn() {
-        for (MotorizedVehicles vehicle : vehicles) {
+        for (MotorizedVehicle vehicle : vehicles) {
             if (vehicle instanceof Saab95) {
                 ((Saab95) vehicle).setTurboOn();
             }
@@ -102,7 +105,7 @@ public class CarController {
     }
 
     void setTurboOff() {
-        for (MotorizedVehicles vehicle : vehicles) {
+        for (MotorizedVehicle vehicle : vehicles) {
             if (vehicle instanceof Saab95) {
                 ((Saab95) vehicle).setTurboOff();
             }
@@ -110,13 +113,13 @@ public class CarController {
     }
 
     void startEngine() {
-        for (MotorizedVehicles vehicle : vehicles) {
+        for (MotorizedVehicle vehicle : vehicles) {
             vehicle.startEngine();
         }
     }
 
     void stopEngine() {
-        for (MotorizedVehicles vehicle : vehicles) {
+        for (MotorizedVehicle vehicle : vehicles) {
             vehicle.stopEngine();
         }
     }
