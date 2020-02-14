@@ -62,7 +62,7 @@ public class CarController {
                 } else if (x > frame.getWidth() - frame.drawPanel.volvoImage.getWidth()) {
                     vehicle.setDirection(Direction.LEFT);
                 }
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveIt(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -116,6 +116,14 @@ public class CarController {
         for (MotorizedVehicle vehicle : vehicles) {
             if (vehicle instanceof CarTransport) {
                 ((CarTransport) vehicle).setTruckBed();
+            }
+        }
+    }
+
+    void setTruckBed(int degree) {
+        for (MotorizedVehicle vehicle : vehicles) {
+            if (vehicle instanceof Scania) {
+                ((Scania) vehicle).setTruckBed(degree);
             }
         }
     }

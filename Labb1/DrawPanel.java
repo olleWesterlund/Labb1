@@ -22,8 +22,8 @@ public class DrawPanel extends JPanel {
     Point scaniaPoint = new Point();
 
 
-    // TODO: Make this genereal for all cars
-    void moveit(int x, int y) {
+    // TODO: Make this general for all cars
+    void moveIt(int x, int y) {
         volvoPoint.x = x;
         volvoPoint.y = y;
         saabPoint.x = x;
