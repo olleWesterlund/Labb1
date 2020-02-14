@@ -112,6 +112,14 @@ public class CarController {
         }
     }
 
+    void setTruckBed() {
+        for (MotorizedVehicle vehicle : vehicles) {
+            if (vehicle instanceof CarTransport) {
+                ((CarTransport) vehicle).setTruckBed();
+            }
+        }
+    }
+
     void startEngine() {
         for (MotorizedVehicle vehicle : vehicles) {
             vehicle.startEngine();
