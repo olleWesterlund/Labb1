@@ -1,5 +1,3 @@
-import javafx.scene.control.Spinner;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -15,7 +13,7 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame{
+public class CarView extends JFrame {
     private static final int X = 1000;
     private static final int Y = 700;
 
@@ -30,7 +28,7 @@ public class CarView extends JFrame{
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
-    JSpinner degreeSpinner =  new JSpinner();
+    JSpinner degreeSpinner = new JSpinner();
     int degreeAmount = 0;
     JLabel degreeLabel = new JLabel("Amount of degree");
 
@@ -40,10 +38,12 @@ public class CarView extends JFrame{
     JButton turnRight = new JButton("Turn Right");
     JButton turboOnButton = new JButton("Saab Turbo on");
     JButton turboOffButton = new JButton("Saab Turbo off");
+
     JButton liftBedButton = new JButton("Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
     JButton addVehicleButton = new JButton("Add vehicle");
     JButton removeVehicleButton =  new JButton("Remove a vehicle");
+
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
@@ -59,7 +59,7 @@ public class CarView extends JFrame{
     private void initComponents(String title) {
 
         this.setTitle(title);
-        this.setPreferredSize(new Dimension(X,Y));
+        this.setPreferredSize(new Dimension(X, Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
@@ -86,17 +86,17 @@ public class CarView extends JFrame{
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
+                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
             }
         });
-        controlWheelPanel.setLayout(new GridLayout(2,2));
+        controlWheelPanel.setLayout(new GridLayout(2, 2));
         controlWheelPanel.add(gasLabel, 0);
         controlWheelPanel.add(gasSpinner, 1);
         controlWheelPanel.add(degreeLabel, 2);
         controlWheelPanel.add(degreeSpinner, 3);
         this.add(controlWheelPanel);
 
-        controlPanel.setLayout(new GridLayout(2,6));
+        controlPanel.setLayout(new GridLayout(2, 6));
         controlPanel.add(gasButton, 0);
         controlPanel.add(brakeButton, 1);
         controlPanel.add(turboOffButton, 2);
@@ -121,6 +121,7 @@ public class CarView extends JFrame{
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/8-15,200));
+
         this.add(stopButton);
 
         // This actionListener is for the gas button only
@@ -203,14 +204,13 @@ public class CarView extends JFrame{
         });
 
 
-
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
         // Get the computer screen resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         // Center the frame
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         // Make the frame visible
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed

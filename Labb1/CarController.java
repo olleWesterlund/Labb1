@@ -49,21 +49,12 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
 
             for (MotorizedVehicle vehicle : vehicles) {
-
                 vehicle.move();
                 int x = (int) Math.round(vehicle.getX());
                 int y = (int) Math.round(vehicle.getY());
-                if (y < 0) {
-                    vehicle.setDirection(Direction.UP);
-                } else if (y > frame.drawPanel.getHeight() - frame.drawPanel.volvoImage.getHeight()) {
-                    vehicle.setDirection(Direction.DOWN);
-                }
-                if (x < 0) {
-                    vehicle.setDirection(Direction.RIGHT);
-                } else if (x > frame.getWidth() - frame.drawPanel.volvoImage.getWidth()) {
-                    vehicle.setDirection(Direction.LEFT);
-                }
-                frame.drawPanel.moveit(x, y);
+                intersectsBottomOrTopWall(vehicle, y);
+                intersectsLeftOrRightWall(vehicle, x);
+                frame.drawPanel.moveIt(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -145,4 +136,23 @@ public class CarController {
         vehicles.add(VehicleFactory.createVolvo240());
     }
 
+    void intersectsBottomOrTopWall(MotorizedVehicle vehicle, int y) {
+        int topWall = 0;
+        int bottomWall = frame.drawPanel.getHeight() - frame.drawPanel.volvoImage.getHeight();
+        if (y >= bottomWall) {
+            vehicle.setDirection(Direction.DOWN);
+        } else if (y <= topWall) {
+            vehicle.setDirection(Direction.UP);
+        }
+    }
+
+    void intersectsLeftOrRightWall(MotorizedVehicle vehicle, int x) {
+        int leftWall = 0;
+        int rightWall = frame.drawPanel.getWidth() - frame.drawPanel.volvoImage.getWidth();
+        if (x >= rightWall) {
+            vehicle.setDirection(Direction.LEFT);
+        } else if (x <= leftWall) {
+            vehicle.setDirection(Direction.RIGHT);
+        }
+    }
 }
