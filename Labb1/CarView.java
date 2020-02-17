@@ -21,7 +21,6 @@ public class CarView extends JFrame{
 
     // The controller member
     CarController carC;
-
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
@@ -43,14 +42,16 @@ public class CarView extends JFrame{
     JButton turboOffButton = new JButton("Saab Turbo off");
     JButton liftBedButton = new JButton("Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
+    JButton addVehicleButton = new JButton("Add vehicle");
+    JButton removeVehicleButton =  new JButton("Remove a vehicle");
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
+    public CarView(String frameName, CarController cc){
         this.carC = cc;
-        initComponents(framename);
+        initComponents(frameName);
     }
 
     // Sets everything in place and fits everything
@@ -104,20 +105,22 @@ public class CarView extends JFrame{
         controlPanel.add(lowerBedButton, 5);
         controlPanel.add(turnLeft,6);
         controlPanel.add(turnRight,7);
-        controlPanel.setPreferredSize(new Dimension((X/2)+10, 200));
+        controlPanel.add(addVehicleButton,8);
+        controlPanel.add(removeVehicleButton,9);
+        controlPanel.setPreferredSize(new Dimension((X/2)+50, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/7-15,200));
+        startButton.setPreferredSize(new Dimension(X/8-15,200));
         this.add(startButton);
 
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/7-15,200));
+        stopButton.setPreferredSize(new Dimension(X/8-15,200));
         this.add(stopButton);
 
         // This actionListener is for the gas button only
@@ -175,6 +178,27 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 carC.stopEngine();
+            }
+        });
+
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.LiftBed();
+            }
+        });
+
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.lowerLiftBed();
+            }
+        });
+
+        addVehicleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.addVehicle();
             }
         });
 

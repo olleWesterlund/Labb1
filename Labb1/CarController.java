@@ -20,20 +20,21 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    // A list of vehicle, modify if needed
 
+    // A list of vehicle, modify if needed
     ArrayList<MotorizedVehicle> vehicles = new ArrayList<>();
 
     //methods:
-
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
-
+        /*
         cc.vehicles.add(new Volvo240());
         cc.vehicles.add(new Saab95());
         cc.vehicles.add(new Scania());
 
+
+         */
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
@@ -122,6 +123,26 @@ public class CarController {
         for (MotorizedVehicle vehicle : vehicles) {
             vehicle.stopEngine();
         }
+    }
+
+    void LiftBed() {
+        for (MotorizedVehicle vehicle : vehicles) {
+            if (vehicle instanceof Truck) {
+                ((Truck) vehicle).setTruckBed();
+            }
+        }
+    }
+
+    void lowerLiftBed() {
+        for (MotorizedVehicle vehicle : vehicles) {
+            if (vehicle instanceof Truck) {
+                ((Truck) vehicle).setTruckBed();
+            }
+        }
+    }
+
+    void addVehicle() {
+        vehicles.add(VehicleFactory.createVolvo240());
     }
 
 }
