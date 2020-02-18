@@ -243,7 +243,7 @@ public abstract class MotorizedVehicle implements Movable {
      * Starts the engine and sets the speed to 0.1.
      */
     protected void startEngine() {
-        currentSpeed = 0.1;
+        setCurrentSpeed(0.1);
         isEngineOn = true;
     }
 
@@ -251,7 +251,7 @@ public abstract class MotorizedVehicle implements Movable {
      * Stops the engine and sets the currentSpeed to 0.
      */
     protected void stopEngine() {
-        currentSpeed = 0;
+        setCurrentSpeed(0);
         isEngineOn = false;
     }
 

@@ -129,17 +129,17 @@ public class CarController {
         }
     }
 
-    void LiftBed() {
+    void LiftBed(int amount) {
         for (VehicleGUI vehicle : vehicles) {
-            if (vehicle.getVehicle() instanceof Truck) {
-                ((Truck) vehicle.getVehicle()).setTruckBed();
+            if (vehicle.getVehicle() instanceof Scania) {
+                ((Truck) vehicle.getVehicle()).setTruckBed(amount);
             }
         }
     }
 
     void lowerLiftBed() {
         for (VehicleGUI vehicle : vehicles) {
-            if (vehicle.getVehicle() instanceof Truck) {
+            if (vehicle.getVehicle() instanceof CarTransport) {
                 ((Truck) vehicle.getVehicle()).setTruckBed();
             }
         }
