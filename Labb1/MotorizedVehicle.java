@@ -8,6 +8,7 @@ public abstract class MotorizedVehicle implements Movable {
     private Direction direction;
     private double xPosition;
     private double yPosition;
+    boolean isEngineOn;
 
     /**
      * Constructor for a vehicle
@@ -243,6 +244,7 @@ public abstract class MotorizedVehicle implements Movable {
      */
     protected void startEngine() {
         currentSpeed = 0.1;
+        isEngineOn = true;
     }
 
     /**
@@ -250,5 +252,7 @@ public abstract class MotorizedVehicle implements Movable {
      */
     protected void stopEngine() {
         currentSpeed = 0;
+        isEngineOn = false;
     }
+
 }

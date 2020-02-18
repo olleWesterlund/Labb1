@@ -108,4 +108,9 @@ public abstract class Truck extends MotorizedVehicle {
             throw new IllegalArgumentException("Can't set truck bed while driving");
         }
     }
+
+    @Override
+    protected double speedFactor() {
+        return super.speedFactor() / 5;
+    }
 }
