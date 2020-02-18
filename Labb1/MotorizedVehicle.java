@@ -86,6 +86,7 @@ public abstract class MotorizedVehicle implements Movable {
             setDirection(Direction.UP);
         }
     }
+
     /**
      * Speeds up the car with some value by calling incrementSpeed,
      * amount must be bigger or equal to 0 and less or equal to one.
