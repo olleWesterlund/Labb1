@@ -22,14 +22,14 @@ public class TruckBed implements MovableTruckBed {
     /**
      * @return current degree of the TruckBed.
      */
-    public int getCurrentDegree() {
+    protected int getCurrentDegree() {
         return currentDegree;
     }
 
     /**
      * @return true or false depending on current degree.
      */
-    public boolean isReadyToDrive() {
+    protected boolean isReadyToDrive() {
         return isReadyToDrive;
     }
 
@@ -49,19 +49,19 @@ public class TruckBed implements MovableTruckBed {
         currentDegree--;
     }
 
-    public void setCurrentDegree(int currentDegree) {
+    protected void setCurrentDegree(int currentDegree) {
         this.currentDegree = currentDegree;
     }
 
-    public void setReadyToDrive(boolean readyToDrive) {
+    protected void setReadyToDrive(boolean readyToDrive) {
         isReadyToDrive = readyToDrive;
     }
 
-    public int getMaxDegree() {
+    protected int getMaxDegree() {
         return maxDegree;
     }
 
-    public int getMinDegree() {
+    protected int getMinDegree() {
         return minDegree;
     }
 }

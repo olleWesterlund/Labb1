@@ -8,7 +8,7 @@ public abstract class MotorizedVehicle implements Movable {
     private Direction direction;
     private double xPosition;
     private double yPosition;
-    boolean isEngineOn;
+    protected boolean isEngineOn;
 
     /**
      * Constructor for a vehicle
@@ -92,7 +92,7 @@ public abstract class MotorizedVehicle implements Movable {
      *
      * @param amount holds how much to increase the speed by a double.
      */
-    public void gas(double amount) {
+    protected void gas(double amount) {
         if (amount >= 0 && amount <= 1) {
             this.incrementSpeed(amount);
         } else {
@@ -106,7 +106,7 @@ public abstract class MotorizedVehicle implements Movable {
      *
      * @param amount holds how much to decrease the speed of the car by a double.
      */
-    public void brake(double amount) {
+    protected void brake(double amount) {
         if (amount >= 0 && amount <= 1) {
             this.decrementSpeed(amount);
         } else {
@@ -151,21 +151,21 @@ public abstract class MotorizedVehicle implements Movable {
     /**
      * @return the current direction of the vehicle.
      */
-    public Direction getDirection() {
+    protected Direction getDirection() {
         return direction;
     }
 
     /**
      * @return x for the position of a vehicle on the X-axis.
      */
-    public double getX() {
+    protected double getX() {
         return xPosition;
     }
 
     /**
      * @return y for the position of a vehicle on the Y-axis.
      */
-    public double getY() {
+    protected double getY() {
         return yPosition;
     }
 
@@ -190,21 +190,21 @@ public abstract class MotorizedVehicle implements Movable {
     /**
      * @return the current speed of the vehicle as a double.
      */
-    public double getCurrentSpeed() {
+    protected double getCurrentSpeed() {
         return currentSpeed;
     }
 
     /**
      * @return the color of the vehicle.
      */
-    public Color getColor() {
+    protected Color getColor() {
         return color;
     }
 
     /**
      * @return the model name of the Vehicle.
      */
-    public String getModelName() {
+    protected String getModelName() {
         return modelName;
     }
 
@@ -213,7 +213,7 @@ public abstract class MotorizedVehicle implements Movable {
      *
      * @param direction Holds a Direction for a vehicle.
      */
-    public void setDirection(Direction direction) {
+    protected void setDirection(Direction direction) {
         this.direction = direction;
     }
 
@@ -235,7 +235,7 @@ public abstract class MotorizedVehicle implements Movable {
     /**
      * @return returns the power of the engine as a double.
      */
-    public double getEnginePower() {
+    protected double getEnginePower() {
         return enginePower;
     }
 

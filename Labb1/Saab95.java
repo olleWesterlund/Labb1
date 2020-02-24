@@ -31,7 +31,7 @@ public class Saab95 extends Car {
      *
      * @return true if turbo is on, false if turbo is off.
      */
-    public boolean isTurboOn() {
+    protected boolean isTurboOn() {
         return turboOn;
     }
 
@@ -41,7 +41,7 @@ public class Saab95 extends Car {
      * @return the EnginePower of Saab95 with turbo on.
      */
     @Override
-    public double speedFactor() {
+    protected double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
         return super.speedFactor() * turbo;
