@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class MotorizedVehicle implements Movable {
+public abstract class MotorizedVehicle implements IMovable {
     private double enginePower;
     protected double currentSpeed;
     private Color color;
