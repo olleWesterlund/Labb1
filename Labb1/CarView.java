@@ -42,7 +42,7 @@ public class CarView extends JFrame {
     JButton liftBedButton = new JButton("Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
     JButton addVehicleButton = new JButton("Add vehicle");
-    JButton removeVehicleButton =  new JButton("Remove a vehicle");
+    JButton removeVehicleButton =  new JButton("Remove vehicle");
 
 
     JButton startButton = new JButton("Start all cars");
