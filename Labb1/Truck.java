@@ -24,7 +24,7 @@ public abstract class Truck extends MotorizedVehicle {
     /**
      * @return truckBed for current Truck.
      */
-    public TruckBed getTruckBed() {
+    protected TruckBed getTruckBed() {
         return truckBed;
     }
 
@@ -53,7 +53,7 @@ public abstract class Truck extends MotorizedVehicle {
      *
      * @param degree the degree that we want to set the current degree of the TruckBed to.
      */
-    public void setTruckBed(int degree) {
+    protected void setTruckBed(int degree) {
         int currentDegree = getTruckBed().getCurrentDegree();
         int minDegree = getTruckBed().getMinDegree();
         int maxDegree = getTruckBed().getMaxDegree();
@@ -86,7 +86,7 @@ public abstract class Truck extends MotorizedVehicle {
     /**
      * Sets TruckBed up or down depending on the previous mode.
      */
-    public void setTruckBed() {
+    protected void setTruckBed() {
         int currentDegree = getTruckBed().getCurrentDegree();
         int minDegree = getTruckBed().getMinDegree();
         int maxDegree = getTruckBed().getMaxDegree();

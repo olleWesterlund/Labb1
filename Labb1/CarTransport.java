@@ -53,7 +53,7 @@ public class CarTransport extends Truck {
      * Sets the values of x and y of the Cars on the CarTransport to the same values as the CarTransport
      * while it's moving.
      */
-    public void updateLoadedCarPositions() {
+    protected void updateLoadedCarPositions() {
         for (Car c : carsOnTransport) {
             c.setY(getY());
             c.setX(getX());
@@ -64,7 +64,7 @@ public class CarTransport extends Truck {
      * Checks if the CarTransport is ready to be unloaded,
      * then unloads the Cars from the CarTransport and puts them beside each other.
      */
-    public void unloadCars() {
+    protected void unloadCars() {
         if (isReadyToUnloadCars()) {
             double x = getX() + 1;
             while (!carsOnTransport.isEmpty()) {
@@ -84,7 +84,7 @@ public class CarTransport extends Truck {
      *
      * @param car The Car we want to load to the CarTransport.
      */
-    public void loadCars(Car car) {
+    protected void loadCars(Car car) {
         if (isReadyToLoadCars() && isCarCloseToTruck(car)) {
             carsOnTransport.push(car);
             loadedCars++;
@@ -102,7 +102,7 @@ public class CarTransport extends Truck {
      *
      * @return true or false depending on if it's ready or not.
      */
-    public boolean isReadyToLoadCars() {
+    protected boolean isReadyToLoadCars() {
         return currentSpeed == 0 && loadedCars < maxCars && !getTruckBed().isReadyToDrive();
     }
 
@@ -111,7 +111,7 @@ public class CarTransport extends Truck {
      *
      * @return true or false depending on if it's ready or not.
      */
-    public boolean isReadyToUnloadCars() {
+    protected boolean isReadyToUnloadCars() {
         return currentSpeed == 0 && !getTruckBed().isReadyToDrive();
     }
 
@@ -121,14 +121,14 @@ public class CarTransport extends Truck {
      * @param car the Car we want to check with the CarTransport.
      * @return true or false depending on if the car is close enough to the CarTransport.
      */
-    public boolean isCarCloseToTruck(Car car) {
+    protected boolean isCarCloseToTruck(Car car) {
         return getX() - car.getX() <= 3 && getY() - car.getY() <= 3;
     }
 
     /**
      * @return the stack of Cars on the CarTransport.
      */
-    public Deque<Car> getCarsOnTransport() {
+    protected Deque<Car> getCarsOnTransport() {
         return carsOnTransport;
     }
 }
