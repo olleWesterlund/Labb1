@@ -11,12 +11,10 @@ public class VehicleGUI {
     public VehicleGUI(MotorizedVehicle vehicle, int x, int y) {
         this.vehicle = vehicle;
         image = addImageToVehicle(vehicle);
-        vehicle.setX(x);
-        vehicle.setY(y);
-
+        vehicle.setxPosition(x);
+        vehicle.setyPosition(y);
         this.point.x = x;
         this.point.y = y;
-
     }
 
     public BufferedImage addImageToVehicle(MotorizedVehicle vehicle) {
