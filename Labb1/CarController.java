@@ -53,18 +53,15 @@ public class CarController {
 
             for (VehicleGUI vehicle : vehicles) {
                 vehicle.getVehicle().move();
-                int x = (int) Math.round(vehicle.getVehicle().getX());
-                int y = (int) Math.round(vehicle.getVehicle().getY());
+                int x = (int) Math.round(vehicle.getVehicle().getxPosition());
+                int y = (int) Math.round(vehicle.getVehicle().getyPosition());
 
                 intersectsBottomOrTopWall(vehicle, y);
                 intersectsLeftOrRightWall(vehicle, x);
                 vehicle.getPoint().x = x;
                 vehicle.getPoint().y = y;
-
-                // repaint() calls the paintComponent method of the panel
-
-
             }
+            // repaint() calls the paintComponent method of the panel
             frame.drawPanel.repaint();
         }
     }

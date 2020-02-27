@@ -1,13 +1,9 @@
 import java.awt.*;
 
-public abstract class MotorizedVehicle implements IMovable {
+public abstract class MotorizedVehicle extends Movable {
     private double enginePower;
-    protected double currentSpeed;
     private Color color;
     private String modelName;
-    private Direction direction;
-    private double xPosition;
-    private double yPosition;
     protected boolean isEngineOn;
 
     /**
@@ -21,71 +17,69 @@ public abstract class MotorizedVehicle implements IMovable {
      * @param xPosition    The position of the vehicle on X-Axis as a Double.
      * @param yPosition    The position of the vehicle on Y-Axis as a Double.
      */
-    public MotorizedVehicle(double enginePower, double currentSpeed, Color color, String modelName, Direction direction, double xPosition, double yPosition) {
+    public MotorizedVehicle(double enginePower, double currentSpeed, Color color, String modelName,
+                            Direction direction, double xPosition, double yPosition) {
+        super(currentSpeed, xPosition, yPosition, direction);
         this.enginePower = enginePower;
-        this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
-        this.direction = direction;
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
     }
-
-    /**
-     * Moves the vehicle with currentSpeed, if the direction of the vehicle is UP or RIGHT
-     * then plus the currentSpeed, for LEFT and DOWN, currentSpeed is subtracted.
-     */
-    @Override
-    public void move() {
-        Direction dir = getDirection();
-        if (dir == Direction.UP) {
-            setY(getY() + currentSpeed);
-        } else if (dir == Direction.RIGHT) {
-            setX(getX() + currentSpeed);
-        } else if (dir == Direction.DOWN) {
-            setY(getY() - currentSpeed);
-        } else if (dir == Direction.LEFT) {
-            setX(getX() - currentSpeed);
-        }
-    }
-
-    /**
-     * Handles what directions to turn the vehicle of turnLeft is applied to a vehicle.
-     * ex. if vehicle direction is RIGHT and turnLeft is applied, the vehicle will have
-     * a new direction UP.
-     */
-    @Override
-    public void turnLeft() {
-        Direction dir = getDirection();
-        if (dir == (Direction.UP)) {
-            setDirection(Direction.LEFT);
-        } else if (dir == (Direction.LEFT)) {
-            setDirection(Direction.DOWN);
-        } else if (dir == (Direction.DOWN)) {
-            setDirection(Direction.RIGHT);
-        } else if (dir == (Direction.RIGHT)) {
-            setDirection(Direction.UP);
-        }
-    }
-
-    /**
-     * Handles what directions to turn the vehicle when turnRight is applied to a vehicle.
-     * ex. if vehicle direction is LEFT and turnRight is applied, the vehicle will have
-     * a new direction UP.
-     */
-    @Override
-    public void turnRight() {
-        Direction dir = getDirection();
-        if (dir == Direction.UP) {
-            setDirection(Direction.RIGHT);
-        } else if (dir == Direction.RIGHT) {
-            setDirection(Direction.DOWN);
-        } else if (dir == Direction.DOWN) {
-            setDirection(Direction.LEFT);
-        } else if (dir == Direction.LEFT) {
-            setDirection(Direction.UP);
-        }
-    }
+//
+//    /**
+//     * Moves the vehicle with currentSpeed, if the direction of the vehicle is UP or RIGHT
+//     * then plus the currentSpeed, for LEFT and DOWN, currentSpeed is subtracted.
+//     */
+//    @Override
+//    public void move() {
+//        Direction dir = getDirection();
+//        if (dir == Direction.UP) {
+//            setY(getY() + currentSpeed);
+//        } else if (dir == Direction.RIGHT) {
+//            setX(getX() + currentSpeed);
+//        } else if (dir == Direction.DOWN) {
+//            setY(getY() - currentSpeed);
+//        } else if (dir == Direction.LEFT) {
+//            setX(getX() - currentSpeed);
+//        }
+//    }
+//
+//    /**
+//     * Handles what directions to turn the vehicle of turnLeft is applied to a vehicle.
+//     * ex. if vehicle direction is RIGHT and turnLeft is applied, the vehicle will have
+//     * a new direction UP.
+//     */
+//    @Override
+//    public void turnLeft() {
+//        Direction dir = getDirection();
+//        if (dir == (Direction.UP)) {
+//            setDirection(Direction.LEFT);
+//        } else if (dir == (Direction.LEFT)) {
+//            setDirection(Direction.DOWN);
+//        } else if (dir == (Direction.DOWN)) {
+//            setDirection(Direction.RIGHT);
+//        } else if (dir == (Direction.RIGHT)) {
+//            setDirection(Direction.UP);
+//        }
+//    }
+//
+//    /**
+//     * Handles what directions to turn the vehicle when turnRight is applied to a vehicle.
+//     * ex. if vehicle direction is LEFT and turnRight is applied, the vehicle will have
+//     * a new direction UP.
+//     */
+//    @Override
+//    public void turnRight() {
+//        Direction dir = getDirection();
+//        if (dir == Direction.UP) {
+//            setDirection(Direction.RIGHT);
+//        } else if (dir == Direction.RIGHT) {
+//            setDirection(Direction.DOWN);
+//        } else if (dir == Direction.DOWN) {
+//            setDirection(Direction.LEFT);
+//        } else if (dir == Direction.LEFT) {
+//            setDirection(Direction.UP);
+//        }
+//    }
     /**
      * Speeds up the car with some value by calling incrementSpeed,
      * amount must be bigger or equal to 0 and less or equal to one.
@@ -147,53 +141,6 @@ public abstract class MotorizedVehicle implements IMovable {
         return getEnginePower() * 0.01;
     }
 
-
-    /**
-     * @return the current direction of the vehicle.
-     */
-    protected Direction getDirection() {
-        return direction;
-    }
-
-    /**
-     * @return x for the position of a vehicle on the X-axis.
-     */
-    protected double getX() {
-        return xPosition;
-    }
-
-    /**
-     * @return y for the position of a vehicle on the Y-axis.
-     */
-    protected double getY() {
-        return yPosition;
-    }
-
-    /**
-     * Sets a new value for xPosition.
-     *
-     * @param x double holds the new xPosition of a vehicle on the X-axis.
-     */
-    protected void setX(double x) {
-        this.xPosition = x;
-    }
-
-    /**
-     * Sets a new value for yPosition.
-     *
-     * @param y double holds the new yPosition of a vehicle on the Y-Axis.
-     */
-    protected void setY(double y) {
-        this.yPosition = y;
-    }
-
-    /**
-     * @return the current speed of the vehicle as a double.
-     */
-    protected double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
     /**
      * @return the color of the vehicle.
      */
@@ -209,26 +156,18 @@ public abstract class MotorizedVehicle implements IMovable {
     }
 
     /**
-     * changes the current direction of the vehicle.
-     *
-     * @param direction Holds a Direction for a vehicle.
-     */
-    protected void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
-    /**
      * changes the current speed of the vehicle.
      *
      * @param newSpeed holds the new speed as a double.
      */
+    @Override
     protected void setCurrentSpeed(double newSpeed) {
         if (newSpeed > enginePower) {
-            this.currentSpeed = enginePower;
+            super.setCurrentSpeed(enginePower);
         } else if (newSpeed < 0) {
-            this.currentSpeed = 0;
+            super.setCurrentSpeed(0);
         } else {
-            this.currentSpeed = newSpeed;
+            super.setCurrentSpeed(newSpeed);
         }
     }
 

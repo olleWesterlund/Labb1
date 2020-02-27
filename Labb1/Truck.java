@@ -39,11 +39,11 @@ public abstract class Truck extends MotorizedVehicle {
             throw new IllegalArgumentException("Can't drive while truck bed is up");
         } else {
             if (newSpeed > maxSpeed) {
-                this.currentSpeed = maxSpeed;
+                super.setCurrentSpeed(maxSpeed);
             } else if (newSpeed < 0) {
-                this.currentSpeed = 0;
+                super.setCurrentSpeed(0);
             } else {
-                this.currentSpeed = newSpeed;
+                super.setCurrentSpeed(newSpeed);
             }
         }
     }
