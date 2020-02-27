@@ -14,22 +14,23 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame implements AnimateListener {
-    public CarView() {
+    public CarView(int x, int y) {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(30, 30, 1000, 700);
+        this.setPreferredSize(new Dimension(x, y));
+        this.setBackground(Color.green);
         setVisible(true);
     }
 
-
-    // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
-    @Override
-    protected void paintComponent(Graphics g) {
-        JPanel.paintComponent(g);
-        for (int i = 0; i < vehicleImage.size(); i++) {
-            g.drawImage(vehicleImage.get(i), (int) vehiclePoint.get(i).getX(), (int) vehiclePoint.get(i).getY(), null);
-        }
+    // Initializes the panel and reads the images
+    public DrawPanel(int x, int y) {
+        this.setDoubleBuffered(true);
+        this.setPreferredSize(new Dimension(x, y));
+        this.setBackground(Color.green);
+        // Print an error message in case file is not found with a try/catch block
     }
+
+
 
     // The controller member
     //DrawPanel drawPanel = new DrawPanel(frameWidth, frameHeight - 240);

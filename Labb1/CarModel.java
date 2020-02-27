@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarModel {
+public class CarModel extends JComponent {
     private static final int frameWidth = 1000;
     private static final int frameHeight = 700;
     // A list of vehicles, modify if needed
@@ -26,8 +26,8 @@ public class CarModel {
 
             for (VehicleGUI vehicle : vehicles) {
                 vehicle.getVehicle().move();
-                int x = (int) Math.round(vehicle.getVehicle().getX());
-                int y = (int) Math.round(vehicle.getVehicle().getY());
+                int x = (int) Math.round(vehicle.getVehicle().getxPosition());
+                int y = (int) Math.round(vehicle.getVehicle().getyPosition());
                 intersectsBottomOrTopWall(vehicle, y);
                 intersectsLeftOrRightWall(vehicle, x);
                 vehicle.getPoint().x = x;
@@ -136,6 +136,16 @@ public class CarModel {
             if (vehicle.getVehicle() instanceof CarTransport) {
                 ((Truck) vehicle.getVehicle()).setTruckBed();
             }
+        }
+    }
+
+    // This method is called each time the panel updates/refreshes/repaints itself
+    // TODO: Change to suit your needs.
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for (int i = 0; i < vehicleImage.size(); i++) {
+            g.drawImage(vehicleImage.get(i), (int) vehiclePoint.get(i).getX(), (int) vehiclePoint.get(i).getY(), null);
         }
     }
 

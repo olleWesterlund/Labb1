@@ -66,8 +66,6 @@ public class CarController {
         frame.setPreferredSize(new Dimension(model.getFrameWidth(), model.getFrameHeight()));
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        frame.add(frame.drawPanel);
-
         SpinnerModel spinnerDegreeModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
