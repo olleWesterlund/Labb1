@@ -41,8 +41,6 @@ public class CarController {
         cc.frame.drawPanel.moveIt(cc.vehicles.get(2).getPoint(), cc.vehicles.get(2).getImage());
         // Start the timer
         cc.timer.start();
-
-
     }
 
     /* Each step the TimerListener moves all the vehicle in the list and tells the
