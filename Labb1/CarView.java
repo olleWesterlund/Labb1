@@ -21,6 +21,17 @@ public class CarView extends JFrame implements AnimateListener {
         setVisible(true);
     }
 
+
+    // This method is called each time the panel updates/refreshes/repaints itself
+    // TODO: Change to suit your needs.
+    @Override
+    protected void paintComponent(Graphics g) {
+        JPanel.paintComponent(g);
+        for (int i = 0; i < vehicleImage.size(); i++) {
+            g.drawImage(vehicleImage.get(i), (int) vehiclePoint.get(i).getX(), (int) vehiclePoint.get(i).getY(), null);
+        }
+    }
+
     // The controller member
     //DrawPanel drawPanel = new DrawPanel(frameWidth, frameHeight - 240);
 

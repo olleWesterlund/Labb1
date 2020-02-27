@@ -1,6 +1,8 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,9 @@ public class CarModel {
     // A list of vehicles, modify if needed
     ArrayList<VehicleGUI> vehicles = new ArrayList<>();
     private List<AnimateListener> listeners = new ArrayList<>();
+    List<BufferedImage> vehicleImage = new ArrayList<>();
+    // To keep track of a single cars position
+    List<Point> vehiclePoint = new ArrayList<>();
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
@@ -29,8 +34,6 @@ public class CarModel {
                 vehicle.getPoint().y = y;
 
                 // repaint() calls the paintComponent method of the panel
-
-
             }
             notifyListeners();
         }
@@ -160,5 +163,12 @@ public class CarModel {
 
     public static int getFrameHeight() {
         return frameHeight;
+    }
+
+
+    // TODO: Make this general for all cars
+    void moveIt(Point point, BufferedImage image) {
+        this.vehiclePoint.add(point);
+        this.vehicleImage.add(image);
     }
 }
