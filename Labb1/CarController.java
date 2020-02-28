@@ -1,8 +1,9 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Random;
+import java.awt.*;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -11,190 +12,221 @@ import java.util.Random;
  */
 
 public class CarController {
-
-    Random random = new Random();
     // member fields:
-
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-
-    // A list of vehicle, modify if needed
-    ArrayList<VehicleGUI> vehicles = new ArrayList<>();
+    CarModel model;
+    DrawPanel drawPanel;
 
     //methods:
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
-    }
 
     /* Each step the TimerListener moves all the vehicle in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
 
-            for (VehicleGUI vehicle : vehicles) {
-                vehicle.getVehicle().move();
-                int x = (int) Math.round(vehicle.getVehicle().getxPosition());
-                int y = (int) Math.round(vehicle.getVehicle().getyPosition());
+    public CarController(String frameName, CarModel model, CarView frame, DrawPanel drawPanel) {
+        this.model = model;
+        this.frame = frame;
+        this.drawPanel = drawPanel;
+        initComponents(frameName);
+    }
 
-                intersectsBottomOrTopWall(vehicle, y);
-                intersectsLeftOrRightWall(vehicle, x);
-                vehicle.getPoint().x = x;
-                vehicle.getPoint().y = y;
+    JPanel controlPanel = new JPanel();
+    JPanel controlWheelPanel = new JPanel();
+
+    JSpinner gasSpinner = new JSpinner();
+    int gasAmount = 0;
+    JLabel gasLabel = new JLabel("Amount of gas");
+
+    JSpinner degreeSpinner = new JSpinner();
+    int degreeAmount = 0;
+    JLabel degreeLabel = new JLabel("Amount of degree");
+
+    JButton gasButton = new JButton("Gas");
+    JButton brakeButton = new JButton("Brake");
+    JButton turnLeft = new JButton("Turn left");
+    JButton turnRight = new JButton("Turn Right");
+    JButton turboOnButton = new JButton("Turbo on");
+    JButton turboOffButton = new JButton("Turbo off");
+    JButton scaniaTruckBed = new JButton("Truck Bed");
+    JButton transportRamp = new JButton("Ramp");
+    JButton addVehicleButton = new JButton("Add vehicle");
+    JButton removeVehicleButton = new JButton("Remove vehicle");
+    JButton startButton = new JButton("Start all cars");
+    JButton stopButton = new JButton("Stop all cars");
+
+    // Sets everything in place and fits everything
+    // TODO: Take a good look and make sure you understand how these methods and components work
+    private void initComponents(String title) {
+
+        frame.setTitle(title);
+        frame.setPreferredSize(new Dimension(model.getFrameWidth(), model.getFrameHeight() + 240));
+        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+
+        frame.add(drawPanel);
+
+        SpinnerModel spinnerDegreeModel =
+                new SpinnerNumberModel(0, //initial value
+                        0, //min
+                        100, //max
+                        1);//step
+        degreeSpinner = new JSpinner((spinnerDegreeModel));
+        degreeSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                degreeAmount = (int) ((JSpinner) e.getSource()).getValue();
             }
-            // repaint() calls the paintComponent method of the panel
-            frame.drawPanel.repaint();
-        }
-    }
+        });
 
-    // Calls the gas method for each vehicle once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (VehicleGUI vehicle : vehicles) {
-            if (vehicle.getVehicle().isEngineOn) {
-                vehicle.getVehicle().gas(gas);
-            } else {
-                throw new IllegalArgumentException("Start Engine to use gas");
+        SpinnerModel spinnerModel =
+                new SpinnerNumberModel(0, //initial value
+                        0, //min
+                        100, //max
+                        1);//step
+        gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
             }
-        }
+        });
+        controlWheelPanel.setLayout(new GridLayout(2, 2));
+        controlWheelPanel.add(gasLabel, 0);
+        controlWheelPanel.add(gasSpinner, 1);
+        controlWheelPanel.add(degreeLabel, 2);
+        controlWheelPanel.add(degreeSpinner, 3);
+        frame.add(controlWheelPanel);
 
-    }
+        controlPanel.setLayout(new GridLayout(2, 6));
+        controlPanel.add(gasButton, 0);
+        controlPanel.add(brakeButton, 1);
+        controlPanel.add(turboOffButton, 2);
+        controlPanel.add(turboOnButton, 3);
+        controlPanel.add(scaniaTruckBed, 4);
+        controlPanel.add(transportRamp, 5);
+        controlPanel.add(turnLeft, 6);
+        controlPanel.add(turnRight, 7);
+        controlPanel.add(addVehicleButton, 8);
+        controlPanel.add(removeVehicleButton, 9);
+        controlPanel.setPreferredSize(new Dimension((model.getFrameWidth() / 2) + 50, 200));
+        frame.add(controlPanel);
+        controlPanel.setBackground(Color.CYAN);
 
-    void breaks(int amount) {
-        double breaks = ((double) amount) / 100;
-        for (VehicleGUI vehicle : vehicles) {
-            vehicle.getVehicle().brake(breaks);
-        }
-    }
 
-    void turnLeft() {
-        for (VehicleGUI vehicle : vehicles) {
-            vehicle.getVehicle().turnLeft();
-        }
-    }
+        startButton.setBackground(Color.blue);
+        startButton.setForeground(Color.green);
+        startButton.setPreferredSize(new Dimension(model.getFrameWidth() / 8 - 15, 200));
+        frame.add(startButton);
 
-    void turnRight() {
-        for (VehicleGUI vehicle : vehicles) {
-            vehicle.getVehicle().turnRight();
-        }
-    }
 
-    void setTurboOn() {
-        for (VehicleGUI vehicle : vehicles) {
-            if (vehicle.getVehicle() instanceof Saab95) {
-                ((Saab95) vehicle.getVehicle()).setTurboOn();
+        stopButton.setBackground(Color.red);
+        stopButton.setForeground(Color.black);
+        stopButton.setPreferredSize(new Dimension(model.getFrameWidth() / 8 - 15, 200));
+
+        frame.add(stopButton);
+
+        // This actionListener is for the gas button only
+        // TODO: Create more for each component as necessary
+        gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.gas(gasAmount);
             }
-        }
-    }
+        });
 
-    void setTurboOff() {
-        for (VehicleGUI vehicle : vehicles) {
-            if (vehicle.getVehicle() instanceof Saab95) {
-                ((Saab95) vehicle.getVehicle()).setTurboOff();
+
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.brake(gasAmount);
             }
-        }
-    }
+        });
 
-    void startEngine() {
-        for (VehicleGUI vehicle : vehicles) {
-            if (vehicle.getVehicle().getCurrentSpeed() == 0) {
-                vehicle.getVehicle().startEngine();
-            } else {
-                continue;
+        turnLeft.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                model.turnLeft();
             }
-        }
-    }
+        });
 
-    void stopEngine() {
-        for (VehicleGUI vehicle : vehicles) {
-            vehicle.getVehicle().stopEngine();
-        }
-    }
-
-    void LiftBed(int amount) {
-        for (VehicleGUI vehicle : vehicles) {
-            if (vehicle.getVehicle() instanceof Scania) {
-                ((Truck) vehicle.getVehicle()).setTruckBed(amount);
+        turnRight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                model.turnRight();
             }
-        }
-    }
+        });
 
-    void lowerLiftBed() {
-        for (VehicleGUI vehicle : vehicles) {
-            if (vehicle.getVehicle() instanceof CarTransport) {
-                ((Truck) vehicle.getVehicle()).setTruckBed();
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                model.setTurboOn();
             }
-        }
-    }
+        });
 
-    void addVehicle() {
-        int x = random.nextInt(3) + 1;
-        if (vehicles.size() < 10) {
-            switch (x) {
-                case 1:
-                    vehicles.add(new VehicleGUI(VehicleFactory.createSaab95(), 10, 10));
-                    break;
-                case 2:
-                    vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240(), 10, 10));
-                    break;
-                case 3:
-                    vehicles.add(new VehicleGUI(VehicleFactory.createScania(), 10, 10));
-                    break;
-                default:
-                    break;
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                model.setTurboOff();
             }
-            int newVehicle = vehicles.size() - 1;
-            frame.drawPanel.moveIt(vehicles.get(newVehicle).getPoint(), vehicles.get(newVehicle).getImage());
-            frame.repaint();
-        }
+        });
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                model.startEngine();
+            }
+        });
+
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                model.stopEngine();
+            }
+        });
+
+        scaniaTruckBed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.LiftBed(degreeAmount);
+            }
+        });
+
+        transportRamp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.lowerLiftBed();
+            }
+        });
+
+        addVehicleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.addVehicle();
+                int newVehicle = model.vehicles.size() - 1;
+                drawPanel.moveIt(model.vehicles.get(newVehicle).getPoint(), model.vehicles.get(newVehicle).getImage());
+                frame.repaint();
+            }
+        });
+
+        removeVehicleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.removeVehicle();
+                drawPanel.vehicleImage.remove(model.getLastVehicle());
+                drawPanel.vehiclePoint.remove(model.getLastVehicle());
+                model.lastVehicle--;
+                frame.repaint();
+            }
+        });
+
+        // Make the frame pack all it's components by respecting the sizes if possible.
+        frame.pack();
+
+        // Get the computer screen resolution
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        // Center the frame
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+        // Make the frame visible
+        frame.setVisible(true);
+        // Make sure the frame exits when "x" is pressed
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-    void removeVehicle() {
-        if (vehicles.size() > 0) {
-            int i = vehicles.size() - 1;
-            frame.drawPanel.vehicleImage.remove(i);
-            frame.drawPanel.vehiclePoint.remove(i);
-            vehicles.remove(i);
-            frame.repaint();
-        }
-    }
-
-    void intersectsBottomOrTopWall(VehicleGUI vehicle, int y) {
-        int topWall = 0;
-        int bottomWall = frame.drawPanel.getHeight() - vehicle.getImage().getHeight();
-        if (y >= bottomWall) {
-            vehicle.getVehicle().setDirection(Direction.DOWN);
-            vehicle.getVehicle().startEngine();
-        } else if (y <= topWall) {
-            vehicle.getVehicle().setDirection(Direction.UP);
-            vehicle.getVehicle().startEngine();
-        }
-    }
-
-    void intersectsLeftOrRightWall(VehicleGUI vehicle, int x) {
-        int leftWall = 0;
-        int rightWall = frame.drawPanel.getWidth() - vehicle.getImage().getWidth();
-        if (x >= rightWall) {
-            vehicle.getVehicle().setDirection(Direction.LEFT);
-            vehicle.getVehicle().startEngine();
-        } else if (x <= leftWall) {
-            vehicle.getVehicle().setDirection(Direction.RIGHT);
-            vehicle.getVehicle().startEngine();
-        }
-    }
-
-
 }
