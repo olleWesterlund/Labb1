@@ -30,7 +30,6 @@ public class CarController {
         initComponents(frameName);
     }
 
-
     JPanel controlPanel = new JPanel();
     JPanel controlWheelPanel = new JPanel();
 
@@ -138,7 +137,7 @@ public class CarController {
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.breaks(gasAmount);
+                model.brake(gasAmount);
             }
         });
 

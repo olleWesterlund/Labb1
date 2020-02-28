@@ -12,9 +12,6 @@ public class CarModel extends JComponent {
     // A list of vehicles, modify if needed
     ArrayList<VehicleGUI> vehicles = new ArrayList<>();
     private List<AnimateListener> listeners = new ArrayList<>();
-    List<BufferedImage> vehicleImage = new ArrayList<>();
-    // To keep track of a single cars position
-    List<Point> vehiclePoint = new ArrayList<>();
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
@@ -76,10 +73,10 @@ public class CarModel extends JComponent {
         }
     }
 
-    void breaks(int amount) {
-        double breaks = ((double) amount) / 100;
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
         for (VehicleGUI vehicle : vehicles) {
-            vehicle.getVehicle().brake(breaks);
+            vehicle.getVehicle().brake(brake);
         }
     }
 
@@ -139,16 +136,6 @@ public class CarModel extends JComponent {
         }
     }
 
-    // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        for (int i = 0; i < vehicleImage.size(); i++) {
-            g.drawImage(vehicleImage.get(i), (int) vehiclePoint.get(i).getX(), (int) vehiclePoint.get(i).getY(), null);
-        }
-    }
-
     void addVehicle() {
         //vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240()));
     }
@@ -173,12 +160,5 @@ public class CarModel extends JComponent {
 
     public static int getFrameHeight() {
         return frameHeight;
-    }
-
-
-    // TODO: Make this general for all cars
-    void moveIt(Point point, BufferedImage image) {
-        this.vehiclePoint.add(point);
-        this.vehicleImage.add(image);
     }
 }

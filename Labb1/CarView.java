@@ -14,23 +14,11 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame implements AnimateListener {
-    public CarView(int x, int y) {
+    public CarView() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(30, 30, 1000, 700);
-        this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
         setVisible(true);
     }
-
-    // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
-        this.setDoubleBuffered(true);
-        this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
-        // Print an error message in case file is not found with a try/catch block
-    }
-
-
 
     // The controller member
     //DrawPanel drawPanel = new DrawPanel(frameWidth, frameHeight - 240);
