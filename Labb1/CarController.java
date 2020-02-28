@@ -29,16 +29,18 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240(), 250, 10));
-        cc.vehicles.add(new VehicleGUI(VehicleFactory.createSaab95(), 10, 10));
-        cc.vehicles.add(new VehicleGUI(VehicleFactory.createScania(), 500, 10));
+//        cc.vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240(), 250, 10));
+//        cc.vehicles.add(new VehicleGUI(VehicleFactory.createSaab95(), 10, 10));
+//        cc.vehicles.add(new VehicleGUI(VehicleFactory.createScania(), 500, 10));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
-
-        cc.frame.drawPanel.moveIt(cc.vehicles.get(0).getPoint(), cc.vehicles.get(0).getImage());
-        cc.frame.drawPanel.moveIt(cc.vehicles.get(1).getPoint(), cc.vehicles.get(1).getImage());
-        cc.frame.drawPanel.moveIt(cc.vehicles.get(2).getPoint(), cc.vehicles.get(2).getImage());
+        for (int i = 0; i < cc.vehicles.size(); i++) {
+            cc.frame.drawPanel.moveIt(cc.vehicles.get(i).getPoint(), cc.vehicles.get(i).getImage());
+        }
+//        cc.frame.drawPanel.moveIt(cc.vehicles.get(0).getPoint(), cc.vehicles.get(0).getImage());
+//        cc.frame.drawPanel.moveIt(cc.vehicles.get(1).getPoint(), cc.vehicles.get(1).getImage());
+//        cc.frame.drawPanel.moveIt(cc.vehicles.get(2).getPoint(), cc.vehicles.get(2).getImage());
         // Start the timer
         cc.timer.start();
     }
@@ -141,7 +143,24 @@ public class CarController {
     }
 
     void addVehicle() {
-        //vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240()));
+        if (vehicles.size() < 10) {
+            vehicles.add(new VehicleGUI(VehicleFactory.createSaab95(), 10, 10));
+            for (int i = 0; i < vehicles.size(); i++) {
+                frame.drawPanel.moveIt(vehicles.get(i).getPoint(), vehicles.get(i).getImage());
+
+            }
+            frame.repaint();
+        }
+    }
+
+    void removeVehicle() {
+        if (vehicles.size() > 0) {
+            int x = vehicles.size() - 1;
+            vehicles.remove(x);
+            frame.drawPanel.vehicleImage.remove(x);
+            frame.drawPanel.vehiclePoint.remove(x);
+        }
+        frame.repaint();
     }
 
     void intersectsBottomOrTopWall(VehicleGUI vehicle, int y) {
