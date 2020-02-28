@@ -44,7 +44,6 @@ public class CarView extends JFrame {
     JButton addVehicleButton = new JButton("Add vehicle");
     JButton removeVehicleButton = new JButton("Remove vehicle");
 
-
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -10,6 +11,8 @@ import java.util.ArrayList;
  */
 
 public class CarController {
+
+    Random random = new Random();
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -29,18 +32,9 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-//        cc.vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240(), 250, 10));
-//        cc.vehicles.add(new VehicleGUI(VehicleFactory.createSaab95(), 10, 10));
-//        cc.vehicles.add(new VehicleGUI(VehicleFactory.createScania(), 500, 10));
-
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
-        for (int i = 0; i < cc.vehicles.size(); i++) {
-            cc.frame.drawPanel.moveIt(cc.vehicles.get(i).getPoint(), cc.vehicles.get(i).getImage());
-        }
-//        cc.frame.drawPanel.moveIt(cc.vehicles.get(0).getPoint(), cc.vehicles.get(0).getImage());
-//        cc.frame.drawPanel.moveIt(cc.vehicles.get(1).getPoint(), cc.vehicles.get(1).getImage());
-//        cc.frame.drawPanel.moveIt(cc.vehicles.get(2).getPoint(), cc.vehicles.get(2).getImage());
+
         // Start the timer
         cc.timer.start();
     }
@@ -116,7 +110,11 @@ public class CarController {
 
     void startEngine() {
         for (VehicleGUI vehicle : vehicles) {
-            vehicle.getVehicle().startEngine();
+            if (vehicle.getVehicle().getCurrentSpeed() == 0) {
+                vehicle.getVehicle().startEngine();
+            } else {
+                continue;
+            }
         }
     }
 
@@ -143,28 +141,38 @@ public class CarController {
     }
 
     void addVehicle() {
+        int x = random.nextInt(3) + 1;
         if (vehicles.size() < 10) {
-            vehicles.add(new VehicleGUI(VehicleFactory.createSaab95(), 10, 10));
-            for (int i = 0; i < vehicles.size(); i++) {
-                frame.drawPanel.moveIt(vehicles.get(i).getPoint(), vehicles.get(i).getImage());
-
+            switch (x) {
+                case 1:
+                    vehicles.add(new VehicleGUI(VehicleFactory.createSaab95(), 10, 10));
+                    break;
+                case 2:
+                    vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240(), 10, 10));
+                    break;
+                case 3:
+                    vehicles.add(new VehicleGUI(VehicleFactory.createScania(), 10, 10));
+                    break;
+                default:
+                    break;
             }
+            int newVehicle = vehicles.size() - 1;
+            frame.drawPanel.moveIt(vehicles.get(newVehicle).getPoint(), vehicles.get(newVehicle).getImage());
             frame.repaint();
         }
     }
 
     void removeVehicle() {
         if (vehicles.size() > 0) {
-            int x = vehicles.size() - 1;
-            vehicles.remove(x);
-            frame.drawPanel.vehicleImage.remove(x);
-            frame.drawPanel.vehiclePoint.remove(x);
+            int i = vehicles.size() - 1;
+            frame.drawPanel.vehicleImage.remove(i);
+            frame.drawPanel.vehiclePoint.remove(i);
+            vehicles.remove(i);
+            frame.repaint();
         }
-        frame.repaint();
     }
 
     void intersectsBottomOrTopWall(VehicleGUI vehicle, int y) {
-
         int topWall = 0;
         int bottomWall = frame.drawPanel.getHeight() - vehicle.getImage().getHeight();
         if (y >= bottomWall) {

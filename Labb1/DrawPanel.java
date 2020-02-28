@@ -27,7 +27,7 @@ public class DrawPanel extends JPanel {
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
+        this.setBackground(Color.lightGray);
         // Print an error message in case file is not found with a try/catch block
 
 
@@ -41,7 +41,5 @@ public class DrawPanel extends JPanel {
         for(int i = 0; i < vehicleImage.size(); i++) {
             g.drawImage(vehicleImage.get(i), (int) vehiclePoint.get(i).getX(), (int) vehiclePoint.get(i).getY(), null);
         }
-//        g.drawImage(vehicleImage.get(1), (int) vehiclePoint.get(1).getX(), (int) vehiclePoint.get(1).getY(), null);
-//        g.drawImage(vehicleImage.get(2), (int) vehiclePoint.get(2).getX(), (int) vehiclePoint.get(2).getY(), null);
     }
 }
