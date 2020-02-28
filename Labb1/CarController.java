@@ -209,11 +209,13 @@ public class CarController {
         removeVehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.removeVehicle();
-                drawPanel.vehicleImage.remove(model.getLastVehicle());
-                drawPanel.vehiclePoint.remove(model.getLastVehicle());
-                model.lastVehicle--;
-                frame.repaint();
+                if (model.vehicles.size() > 0) {
+                    model.removeVehicle();
+                    drawPanel.vehicleImage.remove(model.getLastVehicle());
+                    drawPanel.vehiclePoint.remove(model.getLastVehicle());
+                    model.lastVehicle--;
+                    frame.repaint();
+                }
             }
         });
 
