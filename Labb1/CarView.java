@@ -20,9 +20,6 @@ public class CarView extends JFrame implements AnimateListener {
         setVisible(true);
     }
 
-    // The controller member
-    //DrawPanel drawPanel = new DrawPanel(frameWidth, frameHeight - 240);
-
     @Override
     public void actOnUpdate() {
         repaint();

@@ -25,6 +25,8 @@ public class VehicleGUI {
                 image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
             } else if (vehicle instanceof Scania) {
                 image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+            } else if (vehicle instanceof CarTransport) {
+                image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/carTransport.jpg"));
             }
         } catch (IOException ex) {
             ex.printStackTrace();

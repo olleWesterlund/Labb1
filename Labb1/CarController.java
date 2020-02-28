@@ -3,9 +3,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.*;
-import java.awt.event.*;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -16,17 +14,19 @@ import java.awt.event.*;
 public class CarController {
     // member fields:
     // The frame that represents this instance View of the MVC pattern
-    private CarView frame;
-    private CarModel model;
+    CarView frame;
+    CarModel model;
+    DrawPanel drawPanel;
 
     //methods:
     /* Each step the TimerListener moves all the vehicle in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
 
-    public CarController(String frameName, CarView frame, CarModel model) {
-        this.frame = frame;
+    public CarController(String frameName, CarModel model, CarView frame, DrawPanel drawPanel) {
         this.model = model;
+        this.frame = frame;
+        this.drawPanel = drawPanel;
         initComponents(frameName);
     }
 
@@ -45,15 +45,12 @@ public class CarController {
     JButton brakeButton = new JButton("Brake");
     JButton turnLeft = new JButton("Turn left");
     JButton turnRight = new JButton("Turn Right");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
+    JButton turboOnButton = new JButton("Turbo on");
+    JButton turboOffButton = new JButton("Turbo off");
+    JButton scaniaTruckBed = new JButton("Truck Bed");
+    JButton transportRamp = new JButton("Ramp");
     JButton addVehicleButton = new JButton("Add vehicle");
-    JButton removeVehicleButton = new JButton("Remove a vehicle");
-
-
+    JButton removeVehicleButton = new JButton("Remove vehicle");
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
@@ -62,8 +59,10 @@ public class CarController {
     private void initComponents(String title) {
 
         frame.setTitle(title);
-        frame.setPreferredSize(new Dimension(model.getFrameWidth(), model.getFrameHeight()));
+        frame.setPreferredSize(new Dimension(model.getFrameWidth(), model.getFrameHeight() + 240));
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+
+        frame.add(drawPanel);
 
         SpinnerModel spinnerDegreeModel =
                 new SpinnerNumberModel(0, //initial value
@@ -101,8 +100,8 @@ public class CarController {
         controlPanel.add(brakeButton, 1);
         controlPanel.add(turboOffButton, 2);
         controlPanel.add(turboOnButton, 3);
-        controlPanel.add(liftBedButton, 4);
-        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(scaniaTruckBed, 4);
+        controlPanel.add(transportRamp, 5);
         controlPanel.add(turnLeft, 6);
         controlPanel.add(turnRight, 7);
         controlPanel.add(addVehicleButton, 8);
@@ -183,14 +182,14 @@ public class CarController {
             }
         });
 
-        liftBedButton.addActionListener(new ActionListener() {
+        scaniaTruckBed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.LiftBed(degreeAmount);
             }
         });
 
-        lowerBedButton.addActionListener(new ActionListener() {
+        transportRamp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.lowerLiftBed();
@@ -201,6 +200,20 @@ public class CarController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.addVehicle();
+                int newVehicle = model.vehicles.size() - 1;
+                drawPanel.moveIt(model.vehicles.get(newVehicle).getPoint(), model.vehicles.get(newVehicle).getImage());
+                frame.repaint();
+            }
+        });
+
+        removeVehicleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.removeVehicle();
+                drawPanel.vehicleImage.remove(model.getLastVehicle());
+                drawPanel.vehiclePoint.remove(model.getLastVehicle());
+                model.lastVehicle--;
+                frame.repaint();
             }
         });
 

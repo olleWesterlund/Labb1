@@ -5,12 +5,15 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CarModel extends JComponent {
     private static final int frameWidth = 1000;
-    private static final int frameHeight = 700;
+    private static final int frameHeight = 460;
+    Random random = new Random();
     // A list of vehicles, modify if needed
     ArrayList<VehicleGUI> vehicles = new ArrayList<>();
+    int lastVehicle = vehicles.size() - 1;
     private List<AnimateListener> listeners = new ArrayList<>();
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
@@ -29,7 +32,6 @@ public class CarModel extends JComponent {
                 intersectsLeftOrRightWall(vehicle, x);
                 vehicle.getPoint().x = x;
                 vehicle.getPoint().y = y;
-
                 // repaint() calls the paintComponent method of the panel
             }
             notifyListeners();
@@ -110,7 +112,11 @@ public class CarModel extends JComponent {
 
     void startEngine() {
         for (VehicleGUI vehicle : vehicles) {
-            vehicle.getVehicle().startEngine();
+            if (vehicle.getVehicle().getCurrentSpeed() == 0) {
+                vehicle.getVehicle().startEngine();
+            } else {
+                continue;
+            }
         }
     }
 
@@ -137,7 +143,31 @@ public class CarModel extends JComponent {
     }
 
     void addVehicle() {
-        //vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240()));
+        int rand = random.nextInt(4) + 1;
+        if (vehicles.size() < 10) {
+            switch (rand) {
+                case 1:
+                    vehicles.add(new VehicleGUI(VehicleFactory.createSaab95(), 10, 10));
+                    break;
+                case 2:
+                    vehicles.add(new VehicleGUI(VehicleFactory.createVolvo240(), 10, 10));
+                    break;
+                case 3:
+                    vehicles.add(new VehicleGUI(VehicleFactory.createScania(), 10, 10));
+                    break;
+                case 4:
+                    vehicles.add(new VehicleGUI(VehicleFactory.createCarTransport(), 10, 10));
+                default:
+                    break;
+            }
+            lastVehicle++;
+        }
+    }
+
+    void removeVehicle() {
+        if (vehicles.size() > 0) {
+            vehicles.remove(lastVehicle);
+        }
     }
 
     private void notifyListeners() {
@@ -150,15 +180,15 @@ public class CarModel extends JComponent {
         listeners.add(l);
     }
 
-    public void addVehicle(VehicleGUI vehicle) {
-        vehicles.add(vehicle);
-    }
-
     public static int getFrameWidth() {
         return frameWidth;
     }
 
     public static int getFrameHeight() {
         return frameHeight;
+    }
+
+    public int getLastVehicle() {
+        return lastVehicle;
     }
 }
