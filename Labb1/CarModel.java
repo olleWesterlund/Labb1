@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Random;
 
 public class CarModel extends JComponent {
-    private static final int frameWidth = 1000;
-    private static final int frameHeight = 460;
+    private static final int worldWidth = 1000;
+    private static final int worldHeight = 460;
     Random random = new Random();
     // A list of vehicles, modify if needed
     ArrayList<VehicleGUI> vehicles = new ArrayList<>();
@@ -23,7 +23,6 @@ public class CarModel extends JComponent {
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
             for (VehicleGUI vehicle : vehicles) {
                 vehicle.getVehicle().move();
                 int x = (int) Math.round(vehicle.getVehicle().getxPosition());
@@ -41,7 +40,7 @@ public class CarModel extends JComponent {
 
     void intersectsBottomOrTopWall(VehicleGUI vehicle, int y) {
         int topWall = 0;
-        int bottomWall = frameHeight - vehicle.getImage().getHeight();
+        int bottomWall = worldHeight - vehicle.getImage().getHeight();
         if (y >= bottomWall) {
             vehicle.getVehicle().setDirection(Direction.DOWN);
             vehicle.getVehicle().startEngine();
@@ -53,7 +52,7 @@ public class CarModel extends JComponent {
 
     void intersectsLeftOrRightWall(VehicleGUI vehicle, int x) {
         int leftWall = 0;
-        int rightWall = frameWidth - vehicle.getImage().getWidth();
+        int rightWall = worldWidth - vehicle.getImage().getWidth();
         if (x >= rightWall) {
             vehicle.getVehicle().setDirection(Direction.LEFT);
             vehicle.getVehicle().startEngine();
@@ -180,12 +179,12 @@ public class CarModel extends JComponent {
         listeners.add(l);
     }
 
-    public static int getFrameWidth() {
-        return frameWidth;
+    public static int getWorldWidth() {
+        return worldWidth;
     }
 
-    public static int getFrameHeight() {
-        return frameHeight;
+    public static int getWorldHeight() {
+        return worldHeight;
     }
 
     public int getLastVehicle() {

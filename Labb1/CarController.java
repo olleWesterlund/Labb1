@@ -1,9 +1,5 @@
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.*;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -16,218 +12,111 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     CarModel model;
-    DrawPanel drawPanel;
-
     //methods:
+
     /* Each step the TimerListener moves all the vehicle in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
 
-    public CarController(String frameName, CarModel model, CarView frame, DrawPanel drawPanel) {
+    public CarController(CarModel model, CarView frame) {
         this.model = model;
         this.frame = frame;
-        this.drawPanel = drawPanel;
-        initComponents(frameName);
+        initComponents();
     }
 
-    JPanel controlPanel = new JPanel();
-    JPanel controlWheelPanel = new JPanel();
-
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
-    JLabel gasLabel = new JLabel("Amount of gas");
-
-    JSpinner degreeSpinner = new JSpinner();
-    int degreeAmount = 0;
-    JLabel degreeLabel = new JLabel("Amount of degree");
-
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turnLeft = new JButton("Turn left");
-    JButton turnRight = new JButton("Turn Right");
-    JButton turboOnButton = new JButton("Turbo on");
-    JButton turboOffButton = new JButton("Turbo off");
-    JButton scaniaTruckBed = new JButton("Truck Bed");
-    JButton transportRamp = new JButton("Ramp");
-    JButton addVehicleButton = new JButton("Add vehicle");
-    JButton removeVehicleButton = new JButton("Remove vehicle");
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
-
-    // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
-    private void initComponents(String title) {
-
-        frame.setTitle(title);
-        frame.setPreferredSize(new Dimension(model.getFrameWidth(), model.getFrameHeight() + 240));
-        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
-        frame.add(drawPanel);
-
-        SpinnerModel spinnerDegreeModel =
-                new SpinnerNumberModel(0, //initial value
-                        0, //min
-                        100, //max
-                        1);//step
-        degreeSpinner = new JSpinner((spinnerDegreeModel));
-        degreeSpinner.addChangeListener(new ChangeListener() {
+    // This actionListener is for the gas button only
+    // TODO: Create more for each component as necessary
+    private void initComponents() {
+        frame.gasButton.addActionListener(new ActionListener() {
             @Override
-            public void stateChanged(ChangeEvent e) {
-                degreeAmount = (int) ((JSpinner) e.getSource()).getValue();
+            public void actionPerformed(ActionEvent actionEvent) {
+                model.gas(frame.gasAmount);
             }
         });
 
-        SpinnerModel spinnerModel =
-                new SpinnerNumberModel(0, //initial value
-                        0, //min
-                        100, //max
-                        1);//step
-        gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
-            }
-        });
-        controlWheelPanel.setLayout(new GridLayout(2, 2));
-        controlWheelPanel.add(gasLabel, 0);
-        controlWheelPanel.add(gasSpinner, 1);
-        controlWheelPanel.add(degreeLabel, 2);
-        controlWheelPanel.add(degreeSpinner, 3);
-        frame.add(controlWheelPanel);
-
-        controlPanel.setLayout(new GridLayout(2, 6));
-        controlPanel.add(gasButton, 0);
-        controlPanel.add(brakeButton, 1);
-        controlPanel.add(turboOffButton, 2);
-        controlPanel.add(turboOnButton, 3);
-        controlPanel.add(scaniaTruckBed, 4);
-        controlPanel.add(transportRamp, 5);
-        controlPanel.add(turnLeft, 6);
-        controlPanel.add(turnRight, 7);
-        controlPanel.add(addVehicleButton, 8);
-        controlPanel.add(removeVehicleButton, 9);
-        controlPanel.setPreferredSize(new Dimension((model.getFrameWidth() / 2) + 50, 200));
-        frame.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
-
-
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(model.getFrameWidth() / 8 - 15, 200));
-        frame.add(startButton);
-
-
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(model.getFrameWidth() / 8 - 15, 200));
-
-        frame.add(stopButton);
-
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
-        gasButton.addActionListener(new ActionListener() {
+        frame.brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.gas(gasAmount);
+                model.brake(frame.gasAmount);
             }
         });
 
-
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.brake(gasAmount);
-            }
-        });
-
-        turnLeft.addActionListener(new ActionListener() {
+        frame.turnLeft.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 model.turnLeft();
             }
         });
 
-        turnRight.addActionListener(new ActionListener() {
+        frame.turnRight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 model.turnRight();
             }
         });
 
-        turboOnButton.addActionListener(new ActionListener() {
+        frame.turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 model.setTurboOn();
             }
         });
 
-        turboOffButton.addActionListener(new ActionListener() {
+        frame.turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 model.setTurboOff();
             }
         });
-
-        startButton.addActionListener(new ActionListener() {
+        frame.startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 model.startEngine();
             }
         });
 
-        stopButton.addActionListener(new ActionListener() {
+        frame.stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 model.stopEngine();
             }
         });
 
-        scaniaTruckBed.addActionListener(new ActionListener() {
+        frame.scaniaTruckBed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.LiftBed(degreeAmount);
+                model.LiftBed(frame.degreeAmount);
             }
         });
 
-        transportRamp.addActionListener(new ActionListener() {
+        frame.transportRamp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.lowerLiftBed();
             }
         });
 
-        addVehicleButton.addActionListener(new ActionListener() {
+        frame.addVehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.addVehicle();
                 int newVehicle = model.vehicles.size() - 1;
-                drawPanel.moveIt(model.vehicles.get(newVehicle).getPoint(), model.vehicles.get(newVehicle).getImage());
+                frame.drawPanel.moveIt(model.vehicles.get(newVehicle));
                 frame.repaint();
             }
         });
 
-        removeVehicleButton.addActionListener(new ActionListener() {
+        frame.removeVehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.removeVehicle();
-                drawPanel.vehicleImage.remove(model.getLastVehicle());
-                drawPanel.vehiclePoint.remove(model.getLastVehicle());
-                model.lastVehicle--;
-                frame.repaint();
+                if (model.vehicles.size() > 0) {
+                    model.removeVehicle();
+                    frame.drawPanel.vehicles.remove(model.getLastVehicle());
+                    model.lastVehicle--;
+                    frame.repaint();
+                }
             }
         });
-
-
-        // Make the frame pack all it's components by respecting the sizes if possible.
-        frame.pack();
-
-        // Get the computer screen resolution
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Center the frame
-        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
-        // Make the frame visible
-        frame.setVisible(true);
-        // Make sure the frame exits when "x" is pressed
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
+
