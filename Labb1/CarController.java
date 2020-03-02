@@ -68,6 +68,7 @@ public class CarController {
                 model.setTurboOff();
             }
         });
+
         frame.startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

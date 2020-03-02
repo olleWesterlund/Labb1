@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CarModel extends JComponent {
+public class CarModel {
     private static final int worldWidth = 1000;
     private static final int worldHeight = 460;
     Random random = new Random();
