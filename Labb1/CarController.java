@@ -201,7 +201,7 @@ public class CarController {
             public void actionPerformed(ActionEvent e) {
                 model.addVehicle();
                 int newVehicle = model.vehicles.size() - 1;
-                drawPanel.moveIt(model.vehicles.get(newVehicle).getPoint(), model.vehicles.get(newVehicle).getImage());
+                drawPanel.moveIt(model.vehicles.get(newVehicle));
                 frame.repaint();
             }
         });
@@ -211,8 +211,7 @@ public class CarController {
             public void actionPerformed(ActionEvent e) {
                 if (model.vehicles.size() > 0) {
                     model.removeVehicle();
-                    drawPanel.vehicleImage.remove(model.getLastVehicle());
-                    drawPanel.vehiclePoint.remove(model.getLastVehicle());
+                    drawPanel.vehicles.remove(model.getLastVehicle());
                     model.lastVehicle--;
                     frame.repaint();
                 }
